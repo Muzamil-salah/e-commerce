@@ -7,7 +7,7 @@ export  let storeContext=createContext(0)
 
 // function add to cart
 async function addToCart(productId , quantity=1){
-   return axios.post(`http://localhost:3000/api/v1/cart/add/${productId}` ,{quantity},{
+   return axios.post(`http://localhost:8000/api/v1/cart/add/${productId}` ,{quantity},{
     headers:{
       authorization:`Bearer ${localStorage.getItem('token')}`
     }
@@ -18,7 +18,7 @@ async function addToCart(productId , quantity=1){
 
 // function get items form cart
  async function getCart(){
-  return axios.get('http://localhost:3000/api/v1/cart/all',{
+  return axios.get('http://localhost:8000/api/v1/cart/all',{
    headers:{
      authorization:`Bearer ${localStorage.getItem('token')}`
    }
@@ -29,7 +29,7 @@ async function addToCart(productId , quantity=1){
 
 // function Remove from cart
  async function reomveCartItem(productId){
-  return axios.delete(`http://localhost:3000/api/v1/cart/delete/${productId}` ,{
+  return axios.delete(`http://localhost:8000/api/v1/cart/delete/${productId}` ,{
    headers:{
      authorization:`Bearer ${localStorage.getItem('token')}`
    }
@@ -40,7 +40,7 @@ async function addToCart(productId , quantity=1){
 
 // function Update Quantity
 async function UpdateQuantity(productId , operation){
-  return axios.put(`http://localhost:3000/api/v1/cart/update/${productId}`,{operation} ,{
+  return axios.put(`http://localhost:8000/api/v1/cart/update/${productId}`,{operation} ,{
    headers:{
      authorization:`Bearer ${localStorage.getItem('token')}`
    }
@@ -64,7 +64,7 @@ async function Pay(cartId , shippingAddress){
 
 // function Delete cart
 async function deleteCart(){
-  return axios.delete('http://localhost:3000/api/v1/cart/reset',{
+  return axios.delete('http://localhost:8000/api/v1/cart/reset',{
    headers:{
      authorization:`Bearer ${localStorage.getItem('token')}`
    }

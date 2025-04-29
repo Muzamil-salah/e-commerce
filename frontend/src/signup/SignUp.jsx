@@ -18,7 +18,7 @@ let [loading , setloading]=useState(true);
 
   function sendDataToApi(values){
     setloading(false);
- axios.post('http://localhost:3000/api/v1/user/register' , values)
+ axios.post('http://localhost:8000/api/v1/user/register' , values)
  .then(({data})=>{
   console.log(data)
   setloading(true);

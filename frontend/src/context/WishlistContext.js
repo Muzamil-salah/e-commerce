@@ -9,7 +9,7 @@ export  let WishListContext=createContext(0)
 
 // function add product to Wish list
    async function  addToWishList(productId){
-      return axios.post(`http://localhost:3000/api/v1/wishlist/add/${productId}`,{},{
+      return axios.post(`http://localhost:8000/api/v1/wishlist/add/${productId}`,{},{
             headers:{
                 authorization:`Bearer ${localStorage.getItem('token')}`,
             }
@@ -20,7 +20,7 @@ export  let WishListContext=createContext(0)
     // function get product from Wish list
 
    async function getFromWishList(){
-        return axios.get('http://localhost:3000/api/v1/wishlist/byUser',{
+        return axios.get('http://localhost:8000/api/v1/wishlist/byUser',{
               headers:{
                 authorization:`Bearer ${localStorage.getItem('token')}`,
               }
@@ -31,7 +31,7 @@ export  let WishListContext=createContext(0)
 
       // function remove from Wish list
    async function removeWishItem(productId){
-        return axios.delete(`http://localhost:3000/api/v1/wishlist/delete/${productId}`,{
+        return axios.delete(`http://localhost:8000/api/v1/wishlist/delete/${productId}`,{
               headers:{
                 authorization:`Bearer ${localStorage.getItem('token')}`,
               }

@@ -123,7 +123,7 @@ export default function Laptop() {
 
 
     function getProducts(){
-        return axios.get('http://localhost:3000/api/v1/category/name?name=Accessories')
+        return axios.get('http://localhost:8000/api/v1/category/name?name=Accessories')
       }
     
     let {data , isError , isLoading , isFetching}=  useQuery('getProducts' , getProducts , {

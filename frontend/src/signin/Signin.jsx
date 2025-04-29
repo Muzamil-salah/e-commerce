@@ -23,7 +23,7 @@ const handleCheckboxChange = () => {
   
     function sendDataToApi(values){
       setloading(false);
-   axios.post('http://localhost:3000/api/v1/user/login' , values).then(({data})=>{
+   axios.post('http://localhost:8000/api/v1/user/login' , values).then(({data})=>{
     console.log(data)
     setloading(true);
       //------------- if condition data.message=="success" -------------------

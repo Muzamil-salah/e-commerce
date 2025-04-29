@@ -8,7 +8,7 @@ export  let CategoryContext=createContext(0)
 // function get Categories
 
  async function getCategories(){
-  return axios.get('http://localhost:3000/api/v1/category/all').then(({data})=>data).catch(err => err)
+  return axios.get('http://localhost:8000/api/v1/category/all').then(({data})=>data).catch(err => err)
 }
 
 

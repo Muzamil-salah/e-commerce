@@ -1,13 +1,23 @@
 import mongoose from 'mongoose';
+import dotenv from "dotenv";
 
+dotenv.config();
 const connectDB= async()=>{
-    await mongoose.connect('mongodb+srv://hana:1288567227@cluster0.iyeqh.mongodb.net/muzamil').then(res=>{
-        console.log(`DB connected`);
+    try {
         
-    }).catch(err=>{
-        console.error(`fail to connect` , err);
-        
-})
+        const uri= process.env.CONNECTION_STRING;
+        if(!uri){
+            throw new Error("MONGODB_URI is missing. Check your .env file.");
+        }
+        await mongoose.connect(uri,{
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log("✅ MongoDB Connected Successfully");
+    } catch (error) {
+        console.error("❌ MongoDB Connection Error:", error.message);
+        process.exit(1);
+    }
 }
 
 export default connectDB;

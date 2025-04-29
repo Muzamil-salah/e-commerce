@@ -99,7 +99,7 @@ export default function ProductDetails() {
 
     // ------------------------------ start caching --------------------------------
     async function getProduct() {
-        return await axios.get(`http://localhost:3000/api/v1/product/${x.id}`)
+        return await axios.get(`http://localhost:8000/api/v1/product/${x.id}`)
     }
     let { data, isError, isLoading, isFetching } = useQuery('getProduct', getProduct, {
         cacheTime: 3000

@@ -16,7 +16,7 @@ export default function Phones({item}) {
      // function to get cart quantity
    
      function getCart(){
-       return axios.get(`http://localhost:3000/api/v1/order/orderitems/${x.id}`)
+       return axios.get(`http://localhost:8000/api/v1/order/orderitems/${x.id}`)
      }
    
      let {data , isError , isLoading , isFetching}=  useQuery('getCart' , getCart , {

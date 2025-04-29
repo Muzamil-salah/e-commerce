@@ -126,7 +126,7 @@ export default function HeadPhones() {
 
 
     function getProducts(){
-        return axios.get('http://localhost:3000/api/v1/category/name?name=Clothes')
+        return axios.get('http://localhost:8000/api/v1/category/name?name=Clothes')
       }
     
     let {data , isError , isLoading , isFetching}=  useQuery('getProducts' , getProducts , {

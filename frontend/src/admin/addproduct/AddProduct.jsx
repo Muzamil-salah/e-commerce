@@ -31,7 +31,7 @@ export default function AddProduct() {
         formData.append('numReviews', values.numReviews);
 
         try {
-            const response = await axios.post('http://localhost:3000/api/v1/product/', formData, {
+            const response = await axios.post('http://localhost:8000/api/v1/product/', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

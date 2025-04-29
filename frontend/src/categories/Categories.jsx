@@ -12,7 +12,7 @@ export default function Categories() {
   let [Loading , setLoading]=useState(true)
   let {getCategories}= useContext(CategoryContext)
     function getCategoriess(){
-      return axios.get('http://localhost:3000/api/v1/category/all')
+      return axios.get('http://localhost:8000/api/v1/category/all')
     }
 
   let {data , isError , isLoading , isFetching}=  useQuery('getCategoriess' , getCategoriess , {
