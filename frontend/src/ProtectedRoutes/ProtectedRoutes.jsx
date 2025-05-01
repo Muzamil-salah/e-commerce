@@ -1,8 +1,9 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
 import { jwtDecode } from "jwt-decode";
+import Cookies from 'js-cookie';
 export default function ProtectedRoutes({children}) {
-    let token =localStorage.getItem('token')
+    let token =Cookies.get('token')
    try{
     const decoded = jwtDecode(token);
     
@@ -10,7 +11,7 @@ export default function ProtectedRoutes({children}) {
    }
    catch(err){
     console.log("err")
-    localStorage.clear();
+    Cookies.remove('token');
 
        return <Navigate to="/signin" />
    }

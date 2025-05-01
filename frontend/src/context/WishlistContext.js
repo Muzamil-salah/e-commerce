@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, useState } from "react";
 import { baseURL } from "../utiles/baseUrl";
-
+import Cookies from 'js-cookie';
 
 
 
@@ -11,7 +11,7 @@ export  let WishListContext=createContext(0)
    async function  addToWishList(productId){
       return axios.post(`http://localhost:8000/api/v1/wishlist/add/${productId}`,{},{
             headers:{
-                authorization:`Bearer ${localStorage.getItem('token')}`,
+                authorization:`Bearer ${Cookies.get('token')}`,
             }
         }).then(({data})=>data).catch(err => err)
     }
@@ -22,7 +22,7 @@ export  let WishListContext=createContext(0)
    async function getFromWishList(){
         return axios.get('http://localhost:8000/api/v1/wishlist/byUser',{
               headers:{
-                authorization:`Bearer ${localStorage.getItem('token')}`,
+                authorization:`Bearer ${Cookies.get('token')}`,
               }
           }).then(({data})=>data).catch(err => err)
       }
@@ -33,7 +33,7 @@ export  let WishListContext=createContext(0)
    async function removeWishItem(productId){
         return axios.delete(`http://localhost:8000/api/v1/wishlist/delete/${productId}`,{
               headers:{
-                authorization:`Bearer ${localStorage.getItem('token')}`,
+                authorization:`Bearer ${Cookies.get('token')}`,
               }
           }).then(({data})=>data).catch(err => err)
       }

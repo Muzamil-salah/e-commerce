@@ -17,6 +17,7 @@ import ProductDetails from './productDetails/ProductDetails'
 import StoreContextProvider from './context/storeContext'
 import WishListContextProvider from './context/WishlistContext'
 import ProductContextProvider from './context/ProductContext.js'
+import ProfileContextProvider from './context/ProfileContext.js'
 import Phone from './categories/phone/Phone'
 import Laptop from './categories/laptop/Laptop'
 import Camera from './categories/camera/Camera'
@@ -27,7 +28,7 @@ import EmptyCart from './EmptyCart/EmptyCart'
 import Profile from './profile/Profile'
 import Address from './address/Address'
 import EditProfile from './editProfile/EditProfile'
-import ChangePassword from './editProfile/changePassword/ChangePassword'
+import ChangePassword from './editProfile/changePassword/ChangePassword.jsx'
 import CategoryLayOut from './layouts/categoryLayOut/CategoryLayOut'
 import HeadPhones from './categories/headphone/HeadPhones'
 
@@ -96,8 +97,9 @@ export default function App() {
     <StoreContextProvider>
       <ProductContextProvider>
       <WishListContextProvider>
-
+        <ProfileContextProvider>
       <RouterProvider router={routes}/>
+      </ProfileContextProvider>
       
       </WishListContextProvider>
       </ProductContextProvider>

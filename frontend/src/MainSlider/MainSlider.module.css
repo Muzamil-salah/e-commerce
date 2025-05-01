@@ -6,3 +6,17 @@
     background-repeat: no-repeat;
     background-position: center
 }
+
+/* Remove all hover effects */
+.collection {
+    text-decoration: none !important;
+    color: black;
+    background-color: #2ff3e0 !important;
+
+  }
+
+  /* .noHover:hover {
+    text-decoration: none;
+    color: black;
+    background-color: #2ff3e0;
+  } */

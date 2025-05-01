@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, useState } from "react";
 import { baseURL } from "../utiles/baseUrl";
-
+import Cookies from 'js-cookie';
 
 export  let storeContext=createContext(0)
 
@@ -9,7 +9,7 @@ export  let storeContext=createContext(0)
 async function addToCart(productId , quantity=1){
    return axios.post(`http://localhost:8000/api/v1/cart/add/${productId}` ,{quantity},{
     headers:{
-      authorization:`Bearer ${localStorage.getItem('token')}`
+      authorization:`Bearer ${Cookies.get('token')}`
     }
    })
   .then(({data})=>data).catch(err => err)
@@ -20,7 +20,7 @@ async function addToCart(productId , quantity=1){
  async function getCart(){
   return axios.get('http://localhost:8000/api/v1/cart/all',{
    headers:{
-     authorization:`Bearer ${localStorage.getItem('token')}`
+     authorization:`Bearer ${Cookies.get('token')}`
    }
   }).then(({data})=>data).catch(err => err)
 }
@@ -31,7 +31,7 @@ async function addToCart(productId , quantity=1){
  async function reomveCartItem(productId){
   return axios.delete(`http://localhost:8000/api/v1/cart/delete/${productId}` ,{
    headers:{
-     authorization:`Bearer ${localStorage.getItem('token')}`
+     authorization:`Bearer ${Cookies.get('token')}`
    }
   })
  .then(({data})=>data).catch(err => err)
@@ -42,7 +42,7 @@ async function addToCart(productId , quantity=1){
 async function UpdateQuantity(productId , operation){
   return axios.put(`http://localhost:8000/api/v1/cart/update/${productId}`,{operation} ,{
    headers:{
-     authorization:`Bearer ${localStorage.getItem('token')}`
+     authorization:`Bearer ${Cookies.get('token')}`
    }
   })
  .then(({data})=>data).catch(err => err)
@@ -53,7 +53,7 @@ async function UpdateQuantity(productId , operation){
 async function Pay(cartId , shippingAddress){
   return axios.post(baseURL + 'orders/checkout-session/' + cartId,{shippingAddress} ,{
    headers:{
-     token:localStorage.getItem('token')
+     token:Cookies.get('token')
    }
   })
  .then(({data})=>data).catch(err => err)
@@ -66,7 +66,7 @@ async function Pay(cartId , shippingAddress){
 async function deleteCart(){
   return axios.delete('http://localhost:8000/api/v1/cart/reset',{
    headers:{
-     authorization:`Bearer ${localStorage.getItem('token')}`
+     authorization:`Bearer ${Cookies.get('token')}`
    }
   })
  .then(({data})=>data).catch(err => err)

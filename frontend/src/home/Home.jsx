@@ -21,7 +21,7 @@ export default function Home() {
           <i className="fa-solid fa-cart-shopping fs-2 main-color mb-3"></i>
           <div className='text-white'>
             <h4>Free delivery</h4>
-            <span>to eny place you want around the world</span>
+            <span>to any place you want around the world</span>
           </div>
         </div>
         <div className="col-lg-3 col-md-6 text-md-center p-2 px-4 ">
@@ -42,7 +42,7 @@ export default function Home() {
         <i className="fa-solid fa-shield fs-2 main-color mb-3"></i>
           <div className='text-white'>
             <h4>100% secure payment</h4>
-            <span>to eny place you want around the world</span>
+            <span>to any place you want around the world</span>
           </div>
         </div>
       </div>
@@ -125,7 +125,7 @@ export default function Home() {
             <span className=' fs-6'>
               Harry Up And Book This Offer
             </span>
-            <Link className='btn  d-block bg-main mt-5'>Shop Collection</Link>
+            <Link to="/products" className='btn  d-block bg-main mt-5'>Shop Collection</Link>
             </div>
           </div>
         </div>
