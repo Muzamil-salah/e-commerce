@@ -55,11 +55,11 @@ async  function deleteMyCart(){
   useEffect(() => {
     (async () => {
       let data = await getCart()
-      // console.log(data);
       // console.log(data.cartItems);
       if(data?.status=='success'){
         setCounter(data.length)
         setData(data)
+        console.log(data?.length);
       }
      
       // if (data.status == 'success') {
@@ -108,9 +108,12 @@ async  function deleteMyCart(){
           </div>
         })}
 
-    {/* order button */}
-    {/* to={`/address/${cartItems.data._id}`}  */}
-    <Link  className='btn text-white bg-main my-3'>Place Order</Link >
+<Link 
+  to="/placeorder" 
+  className={`btn text-white bg-main my-3 ${!data?.length ? 'disabled' : ''}`}
+>
+  Place Order
+</Link>
     <button className='btn bg-main text-white ms-5' onClick={()=>{
       deleteMyCart()
     }}>Reset cart</button>

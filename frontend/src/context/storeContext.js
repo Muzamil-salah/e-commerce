@@ -4,7 +4,7 @@ import { baseURL } from "../utiles/baseUrl";
 import Cookies from 'js-cookie';
 
 export  let storeContext=createContext(0)
-
+const token = Cookies.get('token');
 // function add to cart
 async function addToCart(productId , quantity=1){
    return axios.post(`http://localhost:8000/api/v1/cart/add/${productId}` ,{quantity},{
@@ -72,6 +72,42 @@ async function deleteCart(){
  .then(({data})=>data).catch(err => err)
 }
 
+
+
+const createOrder = async (orderData) => {
+  try {
+    const { data } = await axios.post(`/orders`, orderData, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getOrder = async (orderId) => {
+  try {
+    const { data } = await axios.get(`/orders/${orderId}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getMyOrders = async () => {
+  try {
+    const { data } = await axios.get(`/orders/me`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
  export default  function StoreContextProvider({children}){
 
     const [Counter , setCounter]=useState(0)
@@ -84,6 +120,9 @@ async function deleteCart(){
         UpdateQuantity ,
         Pay ,
         deleteCart,
+        createOrder,
+  getOrder,
+  getMyOrders
         }}>
         {children}
 

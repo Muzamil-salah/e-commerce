@@ -31,6 +31,9 @@ import EditProfile from './editProfile/EditProfile'
 import ChangePassword from './editProfile/changePassword/ChangePassword.jsx'
 import CategoryLayOut from './layouts/categoryLayOut/CategoryLayOut'
 import HeadPhones from './categories/headphone/HeadPhones'
+import OrderList from './order/OrderList.js'
+import OrderDetails from './order/OrderDetails.js'
+import PlaceOrder from './order/PlaceOrder.js'
 
 export default function App() {
   const routes = createBrowserRouter([
@@ -58,7 +61,10 @@ export default function App() {
       { path:'Profile' , element:<ProtectedRoutes><Profile/></ProtectedRoutes>},
       { path:'address/:id',element:<ProtectedRoutes><Address/></ProtectedRoutes>},
       { path:'editprofile',element:<ProtectedRoutes><EditProfile/>  </ProtectedRoutes>},
-      {path:'changepassword', element : <ProtectedRoutes><ChangePassword/>  </ProtectedRoutes>}
+      {path:'changepassword', element : <ProtectedRoutes><ChangePassword/>  </ProtectedRoutes>},
+      {path:'placeorder' , element:<ProtectedRoutes><PlaceOrder/>  </ProtectedRoutes>},
+      {path:'order/:orderId' , element:<ProtectedRoutes><OrderDetails/>  </ProtectedRoutes>},
+      {path:'orders' , element:<ProtectedRoutes><OrderList/>  </ProtectedRoutes>}
 
     ]},
     // {path:'/', element:<CategoryLayOut/>,errorElement:<NotFoundPage/>,children:[
