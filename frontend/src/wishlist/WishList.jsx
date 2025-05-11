@@ -19,8 +19,10 @@ export default function WishList() {
 
   async function deleteWishItem(id) {
     let data = await removeWishItem(id)
+    console.log(data);
+    
     if (data.status == 'success') {
-      const ids = data.usersWishlistItems.map(element => element.product);
+      const ids = data.wishlist.map(element => element);
       console.log(ids);
      let response=await getByIds(ids);
      
@@ -44,10 +46,14 @@ export default function WishList() {
   useEffect(() => {
     (async () => {
       let data = await getFromWishList();
+      console.log(data);
+      
       if (data.status == 'success') {
-        const ids = data.wishlistItems.map(element => element.product);
-        console.log(ids);
+        const ids = data.wishlistItems.map(element => element);
+        // console.log(ids);
        let response=await getByIds(ids);
+       console.log(response);
+       
        
         setWishListItems(response.products)
       }

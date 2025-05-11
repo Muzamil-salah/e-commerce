@@ -11,52 +11,50 @@ export default function ProductDetails() {
 
     // add to cart
 
-    let { Counter, setCounter, addToCart , getCart } = useContext(storeContext)
-    let { WCounter, setWCounter, addToWishList ,getFromWishList} = useContext(WishListContext)
+    let { Counter ,setCounter , addToCart , getCart , inCart ,setInCart}=useContext(storeContext)
+    let {addToWishList , setWCounter , removeWishItem ,getFromWishList ,isLoved ,setIsLoved }= useContext(WishListContext)
     let [btnLoading, setBtnLoading] = useState(true)
-     const [isLoved, setIsLoved] = useState([]);
-      const [inCart, setInCart] = useState([]);
+    //  const [isLoved, setIsLoved] = useState([]);
+    //   const [inCart, setInCart] = useState([]);
     // const [review , setReview]=useState('')
 
-     async function getPrevValues(){
-        let data=  await getFromWishList()
-        const loved = data.wishlistItems.map(element => element.product);
-          setIsLoved(loved);
-          // //////////////////////
-      let cartItems= await getCart();
-      let items=cartItems.cartItems.map(element => element.product._id);
-      setInCart(items)
-      
-      setCounter(cartItems.length)
-      }
-      useEffect(() => {
-        // هنا بتحطي الفانكشن اللي تشتغل مرة واحدة بس
-        getPrevValues()
-      }, []);
+    //  async function getPrevValues(){
+    //     let data=  await getFromWishList()
+    //     const loved = data.wishlistItems.map(element => element._id);
+    //       setIsLoved(loved);
+    //       // //////////////////////
+    //   let cartItems= await getCart();
+    //    let items=cartItems.cartItems.map(element => element.product._id);
+    //   setInCart(items)
+    //   setCounter(cartItems.length)
+    //   }
+    //   useEffect(() => {
+    //     // هنا بتحطي الفانكشن اللي تشتغل مرة واحدة بس
+    //     getPrevValues()
+    //   }, []);
     
 
     // add to cart function
-    async function addProductToCart(productId) {
-        setBtnLoading(false)
+    async function addProductToCart( productId){
+      setBtnLoading(false)
         let data=  await addToCart(productId)
-            console.log(data);
-            if(data.status=='success'){
-              let items=data.cartItems.map(element => element.product);
-                    
-                    setInCart(items)
-                    setBtnLoading(true)
-                    setCounter(data.length)
-                    toast.success("Product added successfully !")
-                  }
-                  else if(data?.status=='remove'){
-                    let items=data.cartItems.map(element => element.product);
-                    setInCart(items)
-                    setBtnLoading(true)
-                    setCounter(data.length)
-                    toast.error("Product deleted successfully !")
-              
-                  }
-    }
+        if(data?.status=='success'){
+    
+          let items=data.cartItems.map(element => element.product._id);
+          setInCart(items)
+          setCounter(data.length)
+          setBtnLoading(true)
+          toast.success("Product added successfully !")
+        }
+        else if(data?.status=='remove'){
+          let items=data.cartItems.map(element => element.product._id);
+          setInCart(items)
+          setCounter(data.length)
+          setBtnLoading(true)
+          toast.error("Product deleted successfully !")
+    
+        }
+     } 
 
     // add to wishlist function
     async function addProductToWishList(productId) {
@@ -65,8 +63,8 @@ export default function ProductDetails() {
             if(data.status=='success'){
         
               setWCounter(data.length)
-              console.log(data.usersWishlistItems );
-              const loved = data.usersWishlistItems.map(element => element.product);
+              console.log(data.wishlist );
+              const loved = data.wishlist.map(element => element);
               setIsLoved(loved);
               console.log(loved);
               // setIsLoved(!isLoved);
@@ -74,9 +72,9 @@ export default function ProductDetails() {
             }
             else if(data.status=='deleted'){
               setWCounter(data.length)
-              const loved = data.usersWishlistItems.map(element => element.product._id);
+              const loved = data.wishlist.map(element => element.product);
               setIsLoved(loved);
-              console.log(data.usersWishlistItems);
+              console.log(data.wishlist);
               toast.warning("Product deleted successfully !")
         
             }
@@ -104,7 +102,12 @@ export default function ProductDetails() {
     let { data, isError, isLoading, isFetching } = useQuery('getProduct', getProduct, {
         cacheTime: 3000
     })
+    console.log(data);
     console.log(data?.data?.product);
+    console.log(data?.data?.product._id);
+    console.log(inCart);
+    
+    
     // ------------------------------ end caching--------------------------------
 
     //  function to add comments

@@ -11,32 +11,36 @@ import CategoryNavbar from '../categoryNavbar/CategoryNavbar.jsx'
 
 export default function Camera() {
 
-    let { Counter ,setCounter , addToCart , getCart}=useContext(storeContext)
-   let {addToWishList , setWCounter , removeWishItem ,getFromWishList }= useContext(WishListContext)
+    let { Counter ,setCounter , addToCart , getCart , inCart ,setInCart}=useContext(storeContext)
+    let {addToWishList , setWCounter , removeWishItem ,getFromWishList ,isLoved ,setIsLoved }= useContext(WishListContext)
     let [btnLoading, setBtnLoading] = useState(true)
-      const [isLoved, setIsLoved] = useState([]);
-      const [inCart, setInCart] = useState([]);
+      // const [isLoved, setIsLoved] = useState([]);
+      // const [inCart, setInCart] = useState([]);
 
 
-      async function getPrevValues(){
-        let data=  await getFromWishList()
-        const loved = data.wishlistItems.map(element => element.product);
-          setIsLoved(loved);
-          // //////////////////////
-          let cartItems= await getCart();
-          let items=cartItems.cartItems.map(element => element.product._id);
-          setInCart(items)
+      // async function getPrevValues(){
+      //   let data=  await getFromWishList()
+      //   console.log(data);
+      //   const loved = data.wishlistItems.map(element => element._id);
+      //     setIsLoved(loved);
           
-          setCounter(cartItems.length)
+          
+      //     // //////////////////////
+      //     let cartItems= await getCart();
+      //     let items=cartItems.cartItems.map(element => element.product._id);
+      //     setInCart(items)
+          
+          
+      //     setCounter(cartItems.length)
     
-      }    
+      // }    
 
-        useEffect(() => {
-          // هنا بتحطي الفانكشن اللي تشتغل مرة واحدة بس
-          getPrevValues()
+      //   useEffect(() => {
+      //     // هنا بتحطي الفانكشن اللي تشتغل مرة واحدة بس
+      //     getPrevValues()
          
          
-        }, []);
+      //   }, []);
 
 
     function getProducts(){
@@ -46,30 +50,31 @@ export default function Camera() {
     let {data , isError , isLoading , isFetching}=  useQuery('getProducts' , getProducts , {
       cacheTime:1000
     })
+    console.log(data);
+    
     if(isLoading) return <Loader/>
 
 
-   async function addProductToCart( productId){
-     setBtnLoading(false)
-       let data=  await addToCart(productId)
-       if(data?.status=='success'){
-   
-         let items=data.cartItems.map(element => element.product);
-         
-         setInCart(items)
-         setBtnLoading(true)
-         setCounter(data.length)
-         toast.success("Product added successfully !")
-       }
-       else if(data?.status=='remove'){
-         let items=data.cartItems.map(element => element.product);
-         setInCart(items)
-         setBtnLoading(true)
-         setCounter(data.length)
-         toast.error("Product deleted successfully !")
-   
-       }
-      }
+    async function addProductToCart( productId){
+         setBtnLoading(false)
+           let data=  await addToCart(productId)
+           if(data?.status=='success'){
+       
+             let items=data.cartItems.map(element => element.product._id);
+             setInCart(items)
+             setCounter(data.length)
+             setBtnLoading(true)
+             toast.success("Product added successfully !")
+           }
+           else if(data?.status=='remove'){
+             let items=data.cartItems.map(element => element.product._id);
+             setInCart(items)
+             setCounter(data.length)
+             setBtnLoading(true)
+             toast.error("Product deleted successfully !")
+       
+           }
+        } 
 
 
       async function addProductToWishList(productId){
@@ -79,8 +84,8 @@ export default function Camera() {
           if(data.status=='success'){
       
             setWCounter(data.length)
-            console.log(data.usersWishlistItems );
-            const loved = data.usersWishlistItems.map(element => element.product);
+            console.log(data.wishlist );
+            const loved = data.wishlist.map(element => element);
             setIsLoved(loved);
             console.log(loved);
             // setIsLoved(!isLoved);
@@ -88,9 +93,9 @@ export default function Camera() {
           }
           else if(data.status=='deleted'){
             setWCounter(data.length)
-            const loved = data.usersWishlistItems.map(element => element.product._id);
+            const loved = data.wishlist.map(element => element);
             setIsLoved(loved);
-            console.log(data.usersWishlistItems);
+            console.log(data.wishlist);
             toast.warning("Product deleted successfully !")
       
           }

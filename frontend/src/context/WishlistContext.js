@@ -37,11 +37,15 @@ export  let WishListContext=createContext(0)
               }
           }).then(({data})=>data).catch(err => err)
       }
+       
 
  export default  function WishListContextProvider({children}){
     let [WCounter , setWCounter]=useState(0)
+    let [isLoved, setIsLoved] = useState([]);
     return <WishListContext.Provider value={{WCounter 
         , setWCounter,
+        isLoved,
+        setIsLoved,
          addToWishList ,
          getFromWishList ,
          removeWishItem

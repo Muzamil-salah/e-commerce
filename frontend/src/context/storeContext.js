@@ -110,10 +110,13 @@ const getMyOrders = async () => {
 
  export default  function StoreContextProvider({children}){
 
-    const [Counter , setCounter]=useState(0)
+    let [Counter , setCounter]=useState(0)
+    let [inCart, setInCart] = useState([]);
     return <storeContext.Provider
      value={{Counter, 
         setCounter ,
+        inCart,
+        setInCart,
         addToCart ,
         getCart ,
         reomveCartItem ,
