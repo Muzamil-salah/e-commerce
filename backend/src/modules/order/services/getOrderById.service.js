@@ -10,9 +10,10 @@ const getByOrderId=async(req , res , next)=>{
         if(!order){
             return res.status(404).json({status:'fail' , message:'order not found'})
         }
-        // if(order.user !== user._id){
-        //     return res.status(401).json({status:'fail' , message:'not authorized'})
-        // }
+        
+        if(order.user._id.toString() !== req.user._id.toString()){
+            return res.status(401).json({status:'fail' , message:'not authorized'})
+        }
     
         return res.status(200).json({status:'success' , order})
     } catch (error) {

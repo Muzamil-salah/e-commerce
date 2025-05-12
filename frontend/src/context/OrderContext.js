@@ -53,6 +53,14 @@ export  let orderContext=createContext(0)
           }).then(({data})=>data).catch(err => err)
       }
 
+      async function getMyOrders() {
+         return axios.get(`http://localhost:8000/api/v1/order/getById`,{
+              headers:{
+                authorization:`Bearer ${Cookies.get('token')}`,
+              }
+          }).then(({data})=>data).catch(err => err)
+      }
+
 
        
 
@@ -69,7 +77,8 @@ export  let orderContext=createContext(0)
         createOrder,
         getOrderById,
         getOrderPrices,
-        getOrder
+        getOrder,
+        getMyOrders
          
     }}>
         {children}

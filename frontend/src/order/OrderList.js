@@ -6,16 +6,18 @@ import Loader from '../Loader/Loader';
 import { orderContext } from '../context/OrderContext.js';
 
 export default function OrderList() {
-  const { getMyOrders } = useContext(storeContext);
-   const {createOrder , getOrderById ,orders,setOrders,loading,setLoading,error,setError,} = useContext(orderContext)
+
+   const {createOrder , getOrderById ,orders,setOrders,loading,setLoading,error,setError,getMyOrders} = useContext(orderContext)
   // const [orders, setOrders] = useState([]);
   // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const data = await getOrderById();
-        console.log(data);
+        const data = await getMyOrders();
+        if(data.status=='success'){
+          setOrders(data.orders)
+        }
         
         // setOrders(data);
       } catch (error) {
@@ -26,7 +28,10 @@ export default function OrderList() {
     };
 
     fetchOrders();
-  }, []);
+ 
+    
+  }, [orders]);
+
 
   if (loading) return <Loader />;
 
@@ -61,11 +66,11 @@ export default function OrderList() {
                     <td>{order.totalPrice.toLocaleString()} EGP</td>
                     <td>
                       <span className={`badge ${
-                        order.orderStatus === 'Delivered' ? 'bg-success' :
-                        order.orderStatus === 'Cancelled' ? 'bg-danger' :
+                        order.status === 'Delivered' ? 'bg-success' :
+                        order.status === 'Cancelled' ? 'bg-danger' :
                         'bg-warning'
                       }`}>
-                        {order.orderStatus}
+                        {order.status}
                       </span>
                     </td>
                     <td>

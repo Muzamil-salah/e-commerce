@@ -19,6 +19,7 @@ import OrderContextProvider from './context/OrderContext.js'
 import WishListContextProvider from './context/WishlistContext'
 import ProductContextProvider from './context/ProductContext.js'
 import ProfileContextProvider from './context/ProfileContext.js'
+import { PaymentProvider } from './context/PaymentContext.js'
 import Phone from './categories/phone/Phone'
 import Laptop from './categories/laptop/Laptop'
 import Camera from './categories/camera/Camera'
@@ -106,7 +107,9 @@ export default function App() {
       <WishListContextProvider>
         <ProfileContextProvider>
           <OrderContextProvider>
+            <PaymentProvider>
       <RouterProvider router={routes}/>
+      </PaymentProvider>
       </OrderContextProvider>
       </ProfileContextProvider>
       
