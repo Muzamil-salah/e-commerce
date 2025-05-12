@@ -19,7 +19,7 @@ router.get('/getById' , authentication() , getOrderById)
 router.get('/getPrices' , authentication(),getOrderPrices)
 router.get('/:id' , authentication(),getByOrderId)
 router.post('/payment/process', authentication(), processPayment);
-router.post('/payment/paypal/create', authentication(), createPayPalPayment);
+router.post('/payment/paypal/create/:id', authentication(), createPayPalPayment);
 router.get('/payment/paypal/verify/:orderId', authentication(), verifyPayPalPayment);
 router.post('/payment/stripe/create-intent', authentication(), createStripePaymentIntent);
 

@@ -70,7 +70,7 @@ export default function PlaceOrder() {
       if (data.status === 'success') {
         console.log('im succccessssssssss');
         
-        await deleteCart();
+        // await deleteCart();
         toast.success('Order placed successfully!');
         navigate(`/order/${data.createdOrder._id}`);
       }

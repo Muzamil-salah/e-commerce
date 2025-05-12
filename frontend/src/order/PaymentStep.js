@@ -1,142 +1,3 @@
-// import React, { useState } from 'react';
-// import { 
-//   Elements,
-//   CardElement,
-//   useStripe,
-//   useElements
-// } from '@stripe/stripe-react';
-// import { loadStripe } from '@stripe/stripe-js';
-// import { usePayment } from '../context/PaymentContext';
-// import { toast } from 'react-toastify';
-
-// // Load Stripe with your publishable key
-// const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
-
-// const CheckoutForm = ({ order, onSuccess }) => {
-//   const stripe = useStripe();
-//   const elements = useElements();
-//   const { processPayment } = usePayment();
-//   const [isProcessing, setIsProcessing] = useState(false);
-
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-
-//     if (!stripe || !elements) {
-//       return;
-//     }
-
-//     setIsProcessing(true);
-
-//     const { error, paymentMethod } = await stripe.createPaymentMethod({
-//       type: 'card',
-//       card: elements.getElement(CardElement),
-//     });
-
-//     if (error) {
-//       toast.error(error.message);
-//       setIsProcessing(false);
-//       return;
-//     }
-
-//     try {
-//       await processPayment(order._id, 'CreditCard', { paymentId: paymentMethod.id });
-//       onSuccess();
-//     } catch (error) {
-//       setIsProcessing(false);
-//       toast.error(error.message || 'Payment failed');
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit} className="payment-form">
-//       <div className="mb-3">
-//         <CardElement 
-//           options={{
-//             style: {
-//               base: {
-//                 fontSize: '16px',
-//                 color: '#424770',
-//                 '::placeholder': {
-//                   color: '#aab7c4',
-//                 },
-//               },
-//               invalid: {
-//                 color: '#9e2146',
-//               },
-//             },
-//           }}
-//         />
-//       </div>
-//       <button 
-//         type="submit" 
-//         className="btn bg-main text-white w-100" 
-//         disabled={!stripe || isProcessing}
-//       >
-//         {isProcessing ? 'Processing...' : `Pay $${order.totalPrice.toFixed(2)}`}
-//       </button>
-//     </form>
-//   );
-// };
-
-// const StripePayment = ({ order, onSuccess }) => {
-//   return (
-//     <Elements stripe={stripePromise}>
-//       <CheckoutForm order={order} onSuccess={onSuccess} />
-//     </Elements>
-//   );
-// };
-
-// const PayPalPayment = ({ order, onSuccess }) => {
-//   const { createPayPalPayment } = usePayment();
-//   const [isProcessing, setIsProcessing] = useState(false);
-
-//   const handlePayPalPayment = async () => {
-//     setIsProcessing(true);
-//     try {
-//       const { approvalUrl } = await createPayPalPayment(order._id);
-//       window.location.href = approvalUrl;
-//     } catch (error) {
-//       setIsProcessing(false);
-//       toast.error(error.message || 'PayPal payment failed');
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <button 
-//         onClick={handlePayPalPayment} 
-//         className="btn bg-main text-white w-100"
-//         disabled={isProcessing}
-//       >
-//         {isProcessing ? 'Processing...' : `Pay with PayPal $${order.totalPrice.toFixed(2)}`}
-//       </button>
-//     </div>
-//   );
-// };
-
-// export const PaymentStep = ({ order, paymentMethod, onSuccess }) => {
-//   // Add a check to ensure order exists
-//   if (!order) {
-//     return <div className="alert alert-danger">Order information not available</div>;
-//   }
-
-//   return (
-//     <div className="mt-4">
-//       <h4 className="mb-3">Complete Payment</h4>
-//       {paymentMethod === 'CreditCard' && (
-//         <StripePayment order={order} onSuccess={onSuccess} />
-//       )}
-//       {paymentMethod === 'PayPal' && (
-//         <PayPalPayment order={order} onSuccess={onSuccess} />
-//       )}
-//       {paymentMethod === 'CashOnDelivery' && (
-//         <div className="alert alert-info">
-//           You selected Cash on Delivery. No payment is required now.
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
 
 import React, { useState } from 'react';
 import { usePayment } from '../context/PaymentContext';
@@ -144,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 const PaymentStep = ({ order, paymentMethod }) => {
-  const { processPayment, createPayPalPayment } = usePayment();
+  const { processPayment, createPayPalPayment ,approvalUrl , setUrl } = usePayment();
   const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
 
@@ -170,14 +31,24 @@ const PaymentStep = ({ order, paymentMethod }) => {
 
   const handlePayPalPayment = async () => {
     setIsProcessing(true);
+    
     try {
-      const { approvalUrl } = await createPayPalPayment(order._id);
-      window.location.href = approvalUrl;
+      const data = await createPayPalPayment(order._id);
+     
+      
+      localStorage.setItem('approvalUrl' , data.approvalUrl)
+      if(data.status=='success'){
+        console.log('successsss');
+         setUrl(data.approvalUrl)
+        
+      }
+      // window.location.href = approvalUrl;
     } catch (error) {
       toast.error(error.message || 'PayPal payment failed');
       setIsProcessing(false);
     }
   };
+console.log(approvalUrl);
 
   const handleCashOnDelivery = async () => {
     setIsProcessing(true);

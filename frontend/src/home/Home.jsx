@@ -10,11 +10,13 @@ import camera_Category from "../assets/HomePageImgs/cameras/camers-Category.jpg"
 import discound_img from "../assets/images/banner-image3.png";
 import { Link } from "react-router-dom";
 import Footer from "../footer/Footer";
+import axios from "axios";
+import { usePayment } from "../context/PaymentContext.js";
 
 export default function Home() {
   let { setCounter, getCart,inCart, setInCart , cartItems , setCartItems } = useContext(storeContext);
   let { setWCounter, getFromWishList,isLoved, setIsLoved } = useContext(WishListContext);
- 
+   const { processPayment, createPayPalPayment ,approvalUrl , setUrl } = usePayment();
   
   async function getPrevValues() {
     let data = await getFromWishList();
@@ -32,6 +34,9 @@ export default function Home() {
   }
 
   useEffect(() => {
+
+   console.log('approvalUrl  :  '+approvalUrl);
+   
     // هنا بتحطي الفانكشن اللي تشتغل مرة واحدة بس
     getPrevValues();
   }, []);

@@ -140,7 +140,12 @@ export const processPayment = async (req, res) => {
 // Create PayPal payment
 export const createPayPalPayment = async (req, res) => {
   try {
-    const { orderId } = req.body;
+    
+    const orderId = req.params.id;
+    console.log(req.user);
+    
+    console.log(orderId);
+    
     const order = await Order.findById(orderId);
 
     if (!order) {
@@ -161,13 +166,13 @@ export const createPayPalPayment = async (req, res) => {
         payment_method: 'paypal'
       },
       redirect_urls: {
-        return_url: `${process.env.FRONTEND_URL}/order/${orderId}/paypal/success`,
-        cancel_url: `${process.env.FRONTEND_URL}/order/${orderId}/paypal/cancel`
+        return_url: `${process.env.FRONTEND_URL}/Home`,
+        cancel_url: `${process.env.FRONTEND_URL}/placeorder`
       },
       transactions: [{
         amount: {
-          currency: 'USD',
-          total: order.totalPrice.toFixed(2)
+          currency: 'USD', //changed it from USD///////////////////////
+          total: parseFloat(order.totalPrice).toFixed(2)
         },
         description: `Payment for order ${order._id}`,
         custom: order._id.toString()
@@ -178,7 +183,7 @@ export const createPayPalPayment = async (req, res) => {
       paypal.payment.create(createPayment, (error, payment) => {
         if (error) {
           console.error(error);
-          return res.status(400).json({ status: 'fail', message: 'PayPal payment creation failed', error: error.response.details });
+          return res.status(400).json({ status: 'fail', message: 'PayPal payment creation failed', error: error.message });
         }
 
         // Find the approval URL in the payment links
