@@ -41,6 +41,9 @@ body {
   height:100vh ;
   overflow: auto;
 }
+.bg-dark-color{
+   background-color: var(--dark);
+}
 ::placeholder{
   color: white !important;
 

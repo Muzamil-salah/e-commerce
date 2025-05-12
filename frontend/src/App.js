@@ -15,6 +15,7 @@ import { Offline, Online } from "react-detect-offline";
 import ProtectedRoutes from './ProtectedRoutes/ProtectedRoutes'
 import ProductDetails from './productDetails/ProductDetails'
 import StoreContextProvider from './context/storeContext'
+import OrderContextProvider from './context/OrderContext.js'
 import WishListContextProvider from './context/WishlistContext'
 import ProductContextProvider from './context/ProductContext.js'
 import ProfileContextProvider from './context/ProfileContext.js'
@@ -104,7 +105,9 @@ export default function App() {
       <ProductContextProvider>
       <WishListContextProvider>
         <ProfileContextProvider>
+          <OrderContextProvider>
       <RouterProvider router={routes}/>
+      </OrderContextProvider>
       </ProfileContextProvider>
       
       </WishListContextProvider>

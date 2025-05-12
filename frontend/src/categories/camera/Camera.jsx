@@ -11,7 +11,7 @@ import CategoryNavbar from '../categoryNavbar/CategoryNavbar.jsx'
 
 export default function Camera() {
 
-    let { Counter ,setCounter , addToCart , getCart , inCart ,setInCart}=useContext(storeContext)
+    let { Counter ,setCounter , addToCart , getCart , inCart ,setInCart , setTotalPrice ,setCartItems , cartItems}=useContext(storeContext)
     let {addToWishList , setWCounter , removeWishItem ,getFromWishList ,isLoved ,setIsLoved }= useContext(WishListContext)
     let [btnLoading, setBtnLoading] = useState(true)
       // const [isLoved, setIsLoved] = useState([]);
@@ -50,7 +50,7 @@ export default function Camera() {
     let {data , isError , isLoading , isFetching}=  useQuery('getProducts' , getProducts , {
       cacheTime:1000
     })
-    console.log(data);
+
     
     if(isLoading) return <Loader/>
 
@@ -58,6 +58,8 @@ export default function Camera() {
     async function addProductToCart( productId){
          setBtnLoading(false)
            let data=  await addToCart(productId)
+        
+           
            if(data?.status=='success'){
        
              let items=data.cartItems.map(element => element.product._id);
@@ -74,10 +76,15 @@ export default function Camera() {
              toast.error("Product deleted successfully !")
        
            }
+           setCartItems(data.cartItems)
+           setTotalPrice(data.totalPrice)
+           
+           
         } 
 
 
       async function addProductToWishList(productId){
+  
         
           let data=  await addToWishList(productId)
           console.log(data);

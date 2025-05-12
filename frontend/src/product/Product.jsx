@@ -10,7 +10,7 @@ import { useQuery } from 'react-query'
 export default function Product({item}) {
 // console.log(item.images[0]);
 
-  let { Counter ,setCounter , addToCart , getCart , inCart ,setInCart}=useContext(storeContext)
+  let { Counter ,setCounter , addToCart , getCart , inCart ,setInCart ,setCartItems , setTotalPrice}=useContext(storeContext)
  let {addToWishList , setWCounter , removeWishItem ,getFromWishList ,isLoved ,setIsLoved }= useContext(WishListContext)
  
   let [btnLoading , setBtnLoading]=useState(true)
@@ -64,6 +64,8 @@ export default function Product({item}) {
       toast.error("Product deleted successfully !")
 
     }
+     setCartItems(data.cartItems)
+     setTotalPrice(data.totalPrice)
     // if(data.status=='success'){
     //   setBtnLoading(true)
     //   setCounter(data.numOfCartItems)

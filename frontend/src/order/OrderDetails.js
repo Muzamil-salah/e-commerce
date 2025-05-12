@@ -3,9 +3,10 @@ import { storeContext } from '../context/storeContext';
 import { useParams, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Loader from '../Loader/Loader';
+import { orderContext } from '../context/OrderContext.js';
 
 export default function OrderDetails() {
-  const { getOrder } = useContext(storeContext);
+  const { getOrder } = useContext(orderContext);
   const { orderId } = useParams();
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -13,8 +14,14 @@ export default function OrderDetails() {
   useEffect(() => {
     const fetchOrder = async () => {
       try {
+        console.log(orderId);
+        
         const data = await getOrder(orderId);
-        setOrder(data.order);
+        console.log(data);
+        if(data.status=='success'){
+
+          setOrder(data.order);
+        }
       } catch (error) {
         toast.error(error.response?.data?.message || 'Failed to fetch order');
       } finally {
@@ -24,6 +31,9 @@ export default function OrderDetails() {
 
     fetchOrder();
   }, [orderId]);
+
+  console.log(order);
+  
 
   if (loading) return <Loader />;
   if (!order) return <div className="Dark-Color text-white py-5 text-center">Order not found</div>;
@@ -45,12 +55,12 @@ export default function OrderDetails() {
 
   return (
     <div className="Dark-Color text-white py-5">
-      <div className="container">
+      <div className="container pt-5">
         <div className="row">
-          <div className="col-md-8">
+          <div className="col-md-8 ">
             <h2>Order #{order._id}</h2>
-            <div className="card Dark-Color border-main mb-4">
-              <div className="card-body">
+            <div className="card bg-dark-color  ">
+              <div className="card-body text-white">
                 <h4 className="mb-3">Shipping</h4>
                 <p>
                   <strong>Name: </strong> {order.user.name}
@@ -61,29 +71,29 @@ export default function OrderDetails() {
                 <p>
                   <strong>Address: </strong> {order.shippingAddress.address}, {order.shippingAddress.city}, {order.shippingAddress.postalCode}
                 </p>
-                <p className={getStatusColor(order.orderStatus)}>
-                  <strong>Status: </strong> {order.orderStatus}
+                <p className={getStatusColor(order.status)}>
+                  <strong>Status: </strong> {order.status}
                 </p>
               </div>
             </div>
 
-            <div className="card Dark-Color border-main mb-4">
-              <div className="card-body">
-                <h4 className="mb-3">Payment</h4>
+            <div className="card bg-dark-color border-main">
+              <div className="card-body text-white">
+                <h4 className="">Payment</h4>
                 <p>
                   <strong>Method: </strong> {order.paymentMethod}
                 </p>
-                <p className={order.paymentStatus === 'Paid' ? 'text-success' : 'text-danger'}>
-                  <strong>Status: </strong> {order.paymentStatus}
+                <p className={order.isPaid=== true ? 'text-success' : 'text-danger'}>
+                  <strong className=' text-white'>Status: </strong> <h5 className=' d-inline'>{order.isPaid? 'paid' : ' not paid'}</h5>
                 </p>
               </div>
             </div>
 
-            <div className="card Dark-Color border-main">
-              <div className="card-body">
-                <h4 className="mb-3">Order Items</h4>
+            <div className="card bg-dark-color border-main">
+              <div className="card-body text-white">
+                <h4 className="">Order Items</h4>
                 {order.orderItems.map((item) => (
-                  <div key={item._id} className="row border-bottom py-2 align-items-center">
+                  <div key={item._id} className="row border-bottom align-items-center">
                     <div className="col-md-2">
                       <img src={item.product.images[0]} alt={item.product.name} className="img-fluid" />
                     </div>
@@ -102,8 +112,8 @@ export default function OrderDetails() {
           </div>
 
           <div className="col-md-4">
-            <div className="card Dark-Color border-main">
-              <div className="card-body">
+            <div className="card bg-dark-color border-main">
+              <div className="card-body text-white">
                 <h4 className="mb-3">Order Summary</h4>
                 <div className="d-flex justify-content-between mb-2">
                   <span>Items</span>
@@ -122,13 +132,13 @@ export default function OrderDetails() {
                   <strong>Total</strong>
                   <strong>{order.totalPrice.toLocaleString()} EGP</strong>
                 </div>
-                {order.orderStatus === 'Processing' && (
+                {order.status === 'Processing' && (
                   <button className="btn btn-danger w-100 mb-2">Cancel Order</button>
                 )}
-                {order.paymentMethod === 'CreditCard' && order.paymentStatus === 'Unpaid' && (
+                {order.paymentMethod === 'CreditCard' && order.isPaid === false && (
                   <button className="btn bg-main text-white w-100">Pay Now</button>
                 )}
-                <Link to="/orders" className="btn btn-outline-main w-100 mt-2">
+                <Link to="/orders" className="btn btn-outline-main text-white w-100 mt-2">
                   Back to Orders
                 </Link>
               </div>

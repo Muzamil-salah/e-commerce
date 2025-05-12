@@ -3,17 +3,21 @@ import { storeContext } from '../context/storeContext';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Loader from '../Loader/Loader';
+import { orderContext } from '../context/OrderContext.js';
 
 export default function OrderList() {
   const { getMyOrders } = useContext(storeContext);
-  const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
+   const {createOrder , getOrderById ,orders,setOrders,loading,setLoading,error,setError,} = useContext(orderContext)
+  // const [orders, setOrders] = useState([]);
+  // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const data = await getMyOrders();
-        setOrders(data.orders);
+        const data = await getOrderById();
+        console.log(data);
+        
+        // setOrders(data);
       } catch (error) {
         toast.error(error.response?.data?.message || 'Failed to fetch orders');
       } finally {
@@ -28,7 +32,7 @@ export default function OrderList() {
 
   return (
     <div className="Dark-Color text-white py-5">
-      <div className="container">
+      <div className="container pt-5">
         <h2 className="mb-4">My Orders</h2>
         {orders.length === 0 ? (
           <div className="text-center py-5">

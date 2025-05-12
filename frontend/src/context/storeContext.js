@@ -112,11 +112,17 @@ const getMyOrders = async () => {
 
     let [Counter , setCounter]=useState(0)
     let [inCart, setInCart] = useState([]);
+    let [cartItems, setCartItems] = useState([]);
+    let [totalPrice , setTotalPrice]=useState(0)
     return <storeContext.Provider
      value={{Counter, 
         setCounter ,
         inCart,
         setInCart,
+        cartItems,
+        setCartItems,
+        totalPrice,
+        setTotalPrice,
         addToCart ,
         getCart ,
         reomveCartItem ,

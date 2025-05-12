@@ -1,0 +1,35 @@
+import Order from '../../../DB/models/order.model.js';
+import Cart from '../../../DB/models/Cart.model.js';
+
+ const getOrderPrices = async (req, res) => {
+  try {
+
+    const user=req.user;
+    const cart= await Cart.findOne({user:user}).select('items _id').populate({
+    path: 'items.product',
+    select: 'price' // Only get the price field from Product
+  });
+
+    let orderItems=cart.items
+    console.log(cart);
+    const itemsPrice = orderItems.reduce((sum, item) => {
+      return sum + (item.product.price * item.quantity);
+    }, 0);
+    
+    console.log(itemsPrice);
+    
+    const taxPrice = itemsPrice * 0.15;
+    const shippingPrice = itemsPrice > 1000 ? 100 : 200;
+    const totalPrice = itemsPrice + taxPrice + shippingPrice;
+    
+
+
+    // await Cart.findOneAndDelete({user:user})
+   return res.status(201).json({status:'success',subtotal:itemsPrice , shippingPrice , taxPrice ,totalPrice});
+  } catch (error) {
+   return res.status(500).json({status:'fail', error: error.message });
+  }
+};
+
+
+export default getOrderPrices

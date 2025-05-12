@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import Footer from "../footer/Footer";
 
 export default function Home() {
-  let { setCounter, getCart,inCart, setInCart } = useContext(storeContext);
+  let { setCounter, getCart,inCart, setInCart , cartItems , setCartItems } = useContext(storeContext);
   let { setWCounter, getFromWishList,isLoved, setIsLoved } = useContext(WishListContext);
  
   
@@ -22,9 +22,13 @@ export default function Home() {
     setIsLoved(loved);
     // //////////////////////
     let cartItems = await getCart();
+    setCartItems(cartItems.cartItems)
+    
     let items = cartItems.cartItems.map((element) => element.product._id);
     setInCart(items);
     setCounter(cartItems.length);
+
+
   }
 
   useEffect(() => {

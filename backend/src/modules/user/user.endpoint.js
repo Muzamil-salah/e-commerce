@@ -5,4 +5,5 @@ export const endpoint={
     updateProfile:[userRoles.user , userRoles.admin],
     deleteAccount:[userRoles.user],
     wishlistL:[userRoles.user],
+    getOrders:[userRoles.admin]
 }

@@ -13,7 +13,7 @@ import CategoryNavbar from '../categoryNavbar/CategoryNavbar.jsx'
 
 export default function HeadPhones() {
 
-     let { Counter ,setCounter , addToCart , getCart , inCart ,setInCart}=useContext(storeContext)
+     let {setCartItems,setTotalPrice, Counter ,setCounter , addToCart , getCart , inCart ,setInCart}=useContext(storeContext)
      let {addToWishList , setWCounter , removeWishItem ,getFromWishList ,isLoved ,setIsLoved }= useContext(WishListContext)
     let [btnLoading, setBtnLoading] = useState(true)
       // const [isLoved, setIsLoved] = useState([]);
@@ -70,6 +70,8 @@ export default function HeadPhones() {
              toast.error("Product deleted successfully !")
        
            }
+           setCartItems(data.cartItems)
+     setTotalPrice(data.totalPrice)
         } 
 
 
