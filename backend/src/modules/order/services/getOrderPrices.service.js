@@ -16,10 +16,10 @@ import Cart from '../../../DB/models/Cart.model.js';
       return sum + (item.product.price * item.quantity);
     }, 0);
     
-    console.log(itemsPrice);
+    // console.log(itemsPrice);
     
     const taxPrice = itemsPrice * 0.15;
-    const shippingPrice = itemsPrice > 1000 ? 100 : 200;
+    const shippingPrice = itemsPrice > 1000 ? 25 : 50;
     const totalPrice = itemsPrice + taxPrice + shippingPrice;
     
 

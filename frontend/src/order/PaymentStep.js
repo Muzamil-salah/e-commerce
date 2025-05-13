@@ -5,9 +5,10 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 const PaymentStep = ({ order, paymentMethod }) => {
-  const { processPayment, createPayPalPayment ,approvalUrl , setUrl } = usePayment();
+  const { processPayment, createPayPalPayment ,verifyPayPalPayment ,isPaymentCreated,setIsPaymentCreated,} = usePayment();
   const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
+  
 
   const handleSuccess = () => {
     toast.success('Payment successful!');
@@ -34,21 +35,45 @@ const PaymentStep = ({ order, paymentMethod }) => {
     
     try {
       const data = await createPayPalPayment(order._id);
-     
+      console.log(data);
       
-      localStorage.setItem('approvalUrl' , data.approvalUrl)
       if(data.status=='success'){
-        console.log('successsss');
-         setUrl(data.approvalUrl)
+        // handleSuccess();
+        console.log('suucceesssssssssss');
         
+        // setIsPaymentCreated(true)
       }
       // window.location.href = approvalUrl;
     } catch (error) {
-      toast.error(error.message || 'PayPal payment failed');
+      // toast.error(error.message || 'PayPal payment failed');
       setIsProcessing(false);
     }
+    // const verifyPayment= await verifyPayPalPayment(order._id)
+    // console.log(verifyPayment);
+    
   };
-console.log(approvalUrl);
+
+    const handlePayPalVerification= async () => {
+    try {
+      const data = await verifyPayPalPayment(order._id);
+      console.log(data);
+      
+      // if(data.status=='success'){
+      //   console.log('successsss');
+      // }
+      // window.location.href = approvalUrl;
+    } catch (error) {
+      // toast.error(error.message || 'PayPal payment failed');
+    }
+    // const verifyPayment= await verifyPayPalPayment(order._id)
+    // console.log(verifyPayment);
+    
+  };
+  if(isPaymentCreated){
+    console.log('paymeeent done!!!!!!!!!');
+    handlePayPalVerification()
+  }
+
 
   const handleCashOnDelivery = async () => {
     setIsProcessing(true);

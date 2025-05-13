@@ -105,7 +105,7 @@ import Cart from '../../../DB/models/Cart.model.js';
 
     
     const taxPrice = itemsPrice * 0.15;
-    const shippingPrice = itemsPrice > 1000 ?  100 : 200;
+    const shippingPrice = itemsPrice > 1000 ?  25 : 50;
     const totalPrice = itemsPrice + taxPrice + shippingPrice;
 
     const order = await Order.create({
@@ -118,7 +118,7 @@ import Cart from '../../../DB/models/Cart.model.js';
       shippingPrice,
       totalPrice,
     });
-    console.log(order);
+
     
 
     // const createdOrder = await order.save();

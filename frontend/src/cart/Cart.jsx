@@ -76,10 +76,10 @@ async  function deleteMyCart(){
   return (
     <div className='Dark-Color text-white py-5'>
          <div className=' my-4 pt-4 position-fixed ms-5'>
-        <Link to="/products"> <i className="fa-solid fa-circle-arrow-left main-color fs-2 "></i></Link>
+        <Link to="/products"> <i className="fa-solid fa-circle-arrow-left main-color fs-2 pt-2"></i></Link>
       </div>
       <div className="container my-5 mainSlider_bg py-3">
-        <h2>Shop Cart :</h2>
+        <h2 className='pt-4'>Shop Cart :</h2>
         <p className='main-color' > Total Cart Price : {Number(data?.totalPrice || 0).toLocaleString()} EGP</p>
         {data?.cartItems?.map((item) =>{
        return   <div key={item._id} className="row border-bottom py-2">
@@ -108,6 +108,9 @@ async  function deleteMyCart(){
           </div>
         })}
 
+
+<div className=' d-flex justify-content-between'>
+<div>
 <Link 
   to="/placeorder" 
   className={`btn text-white bg-main my-3 ${!data?.length ? 'disabled' : ''}`}
@@ -117,6 +120,21 @@ async  function deleteMyCart(){
     <button className='btn bg-main text-white ms-5' onClick={()=>{
       deleteMyCart()
     }}>Reset cart</button>
+</div>
+
+<div>
+    <Link 
+  to="/orders" 
+  className={`btn text-white bg-main mt-3 mb-3 me-3  `}
+>
+  my orders
+</Link>
+</div>
+</div>
+
+
+
+
       </div>
      
     </div>

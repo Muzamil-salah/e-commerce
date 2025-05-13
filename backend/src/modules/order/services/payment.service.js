@@ -137,16 +137,12 @@ export const processPayment = async (req, res) => {
   }
 };
 
-// Create PayPal payment
 export const createPayPalPayment = async (req, res) => {
-  try {
+   try {
+       const orderId = req.params.id;
     
-    const orderId = req.params.id;
-    console.log(req.user);
-    
-    console.log(orderId);
-    
-    const order = await Order.findById(orderId);
+    const order = await Order.findById(orderId)
+
 
     if (!order) {
       return res.status(404).json({ status: 'fail', message: 'Order not found' });
@@ -160,56 +156,58 @@ export const createPayPalPayment = async (req, res) => {
       return res.status(400).json({ status: 'fail', message: 'Order is already paid' });
     }
 
-    const createPayment = {
-      intent: 'sale',
-      payer: {
-        payment_method: 'paypal'
-      },
-      redirect_urls: {
-        return_url: `${process.env.FRONTEND_URL}/Home`,
-        cancel_url: `${process.env.FRONTEND_URL}/placeorder`
-      },
-      transactions: [{
-        amount: {
-          currency: 'USD', //changed it from USD///////////////////////
-          total: parseFloat(order.totalPrice).toFixed(2)
+  const createPayment = {
+    intent: 'sale',
+    payer: {
+      payment_method: 'paypal',
+    },
+    redirect_urls: {
+      return_url: `${process.env.FRONTEND_URL}/Home?success=true`,
+      cancel_url: `${process.env.FRONTEND_URL}/Home?success=false`,
+    },
+    transactions: [{
+      amount: {
+        currency: 'USD', // Must be USD for sandbox
+        total: order.totalPrice.toFixed(2), // Total amount
+        details: {
+          subtotal: order.itemsPrice.toFixed(2), // Required
+          shipping: order.shippingPrice.toFixed(2), // Required
+          tax: order.taxPrice.toFixed(2), // Required
         },
-        description: `Payment for order ${order._id}`,
-        custom: order._id.toString()
-      }]
-    };
+      },
+      description: `Order #${order._id}`,
+      invoice_number: order._id.toString(), // Unique invoice ID
+    }],
+  };
 
-    return new Promise((resolve, reject) => {
-      paypal.payment.create(createPayment, (error, payment) => {
-        if (error) {
-          console.error(error);
-          return res.status(400).json({ status: 'fail', message: 'PayPal payment creation failed', error: error.message });
-        }
-
-        // Find the approval URL in the payment links
-        const approvalUrl = payment.links.find(link => link.rel === 'approval_url').href;
-        
-        return res.status(200).json({ 
-          status: 'success', 
-          approvalUrl,
-          paymentId: payment.id
-        });
-      });
+  const payment = await new Promise((resolve, reject) => {
+    paypal.payment.create(createPayment, (error, payment) => {
+      if (error) {
+        console.error('PayPal creation error:', error.response?.details);
+        return reject(error);
+      }
+      resolve(payment);
     });
+  });
 
-  } catch (error) {
-    console.error(error);
+  return res.status(201).json({status:'success' , paymentId: payment.id, approvalUrl:payment.links.find(l => l.rel === 'approval_url').href})
+   } catch (error) {
+     console.error(error);
     return res.status(500).json({ status: 'fail', message: 'PayPal payment creation failed', error: error.message });
-  }
+   }
 };
 
 // Verify PayPal payment
 export const verifyPayPalPayment = async (req, res) => {
   try {
-    const { paymentId, payerId } = req.query;
-    const { orderId } = req.params;
-
+    console.log('i entered here!!!!!');
+    
+     const { paymentId } = req.query;
+    const  orderId  = req.params.orderId;
     const order = await Order.findById(orderId);
+    if (!paymentId ) {
+      return res.status(400).json({status:'fail' , message:'missing values'})
+    }
 
     if (!order) {
       return res.status(404).json({ status: 'fail', message: 'Order not found' });
@@ -223,47 +221,35 @@ export const verifyPayPalPayment = async (req, res) => {
       return res.status(400).json({ status: 'fail', message: 'Order is already paid' });
     }
 
-    const executePayment = {
-      payer_id: payerId,
-      transactions: [{
-        amount: {
-          currency: 'USD',
-          total: order.totalPrice.toFixed(2)
-        }
-      }]
-    };
 
-    return new Promise((resolve, reject) => {
-      paypal.payment.execute(paymentId, executePayment, async (error, payment) => {
-        if (error) {
-          console.error(error);
-          return res.status(400).json({ status: 'fail', message: 'PayPal payment failed', error: error.response.details });
-        }
-
-        if (payment.state !== 'approved') {
-          return res.status(400).json({ status: 'fail', message: 'PayPal payment not approved' });
-        }
-
-        // Update order
-        order.isPaid = true;
-        order.paidAt = Date.now();
-        order.paymentResult = {
-          id: payment.id,
-          status: payment.state,
-          update_time: payment.update_time,
-          email_address: payment.payer.payer_info.email
-        };
-        order.status = 'Processing';
-        
-        await order.save();
-
-        return res.redirect(`${process.env.FRONTEND_URL}/order/${orderId}?payment=success`);
+     // 2. Get payment details first
+    const paymentDetails = await new Promise((resolve, reject) => {
+      paypal.payment.get(paymentId, (err, payment) => {
+        if (err) return reject(err);
+        resolve(payment);
       });
     });
+  if(paymentDetails.payer){
+    return res.status(200).json({status:'success' , message:'paid'})
+  }
+  else{
 
+    return res.status(200).json({status:'fail' , message:'not paid'})
+  }
+    
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ status: 'fail', message: 'PayPal payment verification failed', error: error.message });
+    console.error('Full PayPal verification error:', {
+      message: error.message,
+      debug_id: error.response?.debug_id,
+      details: error.response?.details
+    });
+
+    return res.status(400).json({
+      status: 'fail',
+      message: 'Payment verification failed',
+      debug_id: error.response?.debug_id,
+      error_details: error.response
+    });
   }
 };
 

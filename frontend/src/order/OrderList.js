@@ -37,6 +37,9 @@ export default function OrderList() {
 
   return (
     <div className="Dark-Color text-white py-5">
+      <div className=' my-4 pt-4 position-fixed ms-1'>
+              <Link to="/cart"> <i className="fa-solid fa-circle-arrow-left main-color fs-2 pt-2"></i></Link>
+            </div>
       <div className="container pt-5">
         <h2 className="mb-4">My Orders</h2>
         {orders.length === 0 ? (

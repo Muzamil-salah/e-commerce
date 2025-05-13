@@ -8,15 +8,17 @@ import laptop_Category from "../assets/HomePageImgs/laptops/laptop-Category.jpg"
 import headphone_Category from "../assets/HomePageImgs/HeadPhones/headPhoneCategory.jpg";
 import camera_Category from "../assets/HomePageImgs/cameras/camers-Category.jpg";
 import discound_img from "../assets/images/banner-image3.png";
-import { Link } from "react-router-dom";
+import { Link  , useLocation} from "react-router-dom";
 import Footer from "../footer/Footer";
 import axios from "axios";
 import { usePayment } from "../context/PaymentContext.js";
+import Cookies from 'js-cookie';
 
 export default function Home() {
-  let { setCounter, getCart,inCart, setInCart , cartItems , setCartItems } = useContext(storeContext);
+  let { setCounter, getCart,inCart, setInCart , cartItems , setCartItems ,deleteCart } = useContext(storeContext);
   let { setWCounter, getFromWishList,isLoved, setIsLoved } = useContext(WishListContext);
-   const { processPayment, createPayPalPayment ,approvalUrl , setUrl } = usePayment();
+  const { isPaymentCreated ,verifyPayPalPayment ,setIsPaymentCreated } = usePayment();
+ const location = useLocation();
   
   async function getPrevValues() {
     let data = await getFromWishList();
@@ -33,13 +35,47 @@ export default function Home() {
 
   }
 
+  const verifyPayment=async()=>{
+    try {
+       let orderId=Cookies.get('orderId')
+       let data=await verifyPayPalPayment(orderId)
+       if(data.message=='paid'){
+        deleteCart()
+       }
+       console.log(data);
+       
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
   useEffect(() => {
 
-   console.log('approvalUrl  :  '+approvalUrl);
+     const queryParams = new URLSearchParams(location.search);
+     const success = queryParams.get('success');
+      if (success === 'true') {
+       
+        // Payment was successful
+        console.log('Payment completed successfully');
+     verifyPayment()
+        // You might want to verify the payment here
+
+
+        // verifyPayment(paymentId);
+      } else {
+        // Payment was cancelled
+        console.log('Payment was cancelled');
+      }
+      
+      // Clean up the URL (optional)
+      window.history.replaceState({}, document.title, '/Home');
    
     // هنا بتحطي الفانكشن اللي تشتغل مرة واحدة بس
     getPrevValues();
-  }, []);
+  }, [location]);
+  console.log(isPaymentCreated);
+  
   return (
     <>
       <div className={`  ${styles.main} pt-2`}>

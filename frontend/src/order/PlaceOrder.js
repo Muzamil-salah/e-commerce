@@ -70,7 +70,7 @@ export default function PlaceOrder() {
       if (data.status === 'success') {
         console.log('im succccessssssssss');
         
-        // await deleteCart();
+        await deleteCart();
         toast.success('Order placed successfully!');
         navigate(`/order/${data.createdOrder._id}`);
       }
@@ -175,6 +175,14 @@ export default function PlaceOrder() {
                     <option value="CreditCard">Credit Card</option>
                     <option value="PayPal">PayPal</option>
                   </select>
+                </div>
+                <div>
+                    <Link 
+                  to="/cart" 
+                  className={`btn text-white bg-main mt-3 mb-3 me-3  `}
+                >
+                  Cancel
+                </Link>
                 </div>
               </div>
             </div>
