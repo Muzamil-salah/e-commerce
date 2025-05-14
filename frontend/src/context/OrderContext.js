@@ -62,23 +62,53 @@ export  let orderContext=createContext(0)
       }
 
 
+      
+      async function updateOrder(updates , orderId = Cookies.get('orderId')) {
+      //  let orderId= Cookies.get('orderId')
+         return axios.put(`http://localhost:8000/api/v1/order/update/${orderId}`,updates,{
+              headers:{
+                authorization:`Bearer ${Cookies.get('token')}`,
+              }
+          }).then(({data})=>data).catch(err => err)
+      }
+
+       async function deleteOrder(orderId) {
+      //  let orderId= Cookies.get('orderId')
+         return axios.delete(`http://localhost:8000/api/v1/order/delete/${orderId}`,{
+          headers:{
+                authorization:`Bearer ${Cookies.get('token')}`,
+              }
+          }).then(({data})=>data).catch(err => err)
+
+          
+         
+      }
+
+
+
+
        
 
  export default  function OrderContextProvider({children}){
     const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  let [isDeleted, setIsDeleted] = useState([]);
     return <orderContext.Provider value={{orders,
         setOrders,
         loading,
         setLoading,
         error,
         setError,
+        isDeleted,
+        setIsDeleted,
         createOrder,
         getOrderById,
         getOrderPrices,
         getOrder,
-        getMyOrders
+        getMyOrders,
+        updateOrder,
+        deleteOrder
          
     }}>
         {children}

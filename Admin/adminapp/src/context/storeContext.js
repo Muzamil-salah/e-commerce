@@ -1,8 +1,17 @@
 import axios from "axios";
 import { createContext, useState } from "react";
-
+import Cookies from 'js-cookie';
 
 export  let storeContext=createContext(0)
+
+
+ async function getAllOrders(){
+  return axios.get( 'http://localhost:8000/api/v1/order/getAll',{
+   headers:{
+     token:Cookies.get('token')
+   }
+  }).then(({data})=>data).catch(err => err)
+}
 
 // function add to cart
 function addToCart(productId){
@@ -83,6 +92,7 @@ async function deleteCart(){
         UpdateQuantity ,
         Pay ,
         deleteCart,
+        getAllOrders
         }}>
         {children}
 

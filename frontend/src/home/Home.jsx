@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { storeContext } from "../context/storeContext";
 import { WishListContext } from "../context/WishlistContext";
+import { orderContext } from "../context/OrderContext.js";
 import styles from "./Home.module.css";
 import MainSlider from "../MainSlider/MainSlider";
 import phone_Category from "../assets/HomePageImgs/phones/phone-Category.jpg";
@@ -18,6 +19,7 @@ export default function Home() {
   let { setCounter, getCart,inCart, setInCart , cartItems , setCartItems ,deleteCart } = useContext(storeContext);
   let { setWCounter, getFromWishList,isLoved, setIsLoved } = useContext(WishListContext);
   const { isPaymentCreated ,verifyPayPalPayment ,setIsPaymentCreated } = usePayment();
+  let {updateOrder}= useContext(orderContext)
  const location = useLocation();
   
   async function getPrevValues() {
@@ -35,12 +37,16 @@ export default function Home() {
 
   }
 
-  const verifyPayment=async()=>{
+  const verifyPayment=async(updates)=>{
     try {
        let orderId=Cookies.get('orderId')
        let data=await verifyPayPalPayment(orderId)
        if(data.message=='paid'){
-        deleteCart()
+      //  let updates={isPaid:true}
+       const response=await updateOrder(updates)
+       console.log(response);
+       getPrevValues()
+       
        }
        console.log(data);
        
@@ -58,7 +64,7 @@ export default function Home() {
        
         // Payment was successful
         console.log('Payment completed successfully');
-     verifyPayment()
+     verifyPayment({isPaid:true , status:'Pending'})
         // You might want to verify the payment here
 
 
