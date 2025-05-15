@@ -41,6 +41,8 @@ export default function Signin() {
     try {
       setLoading(false);
       const { data } = await axios.post('http://localhost:8000/api/v1/user/login', values);
+      console.log(data);
+      
       
       if (data && data.token) {
         Cookies.set('token', data.token, { expires: 7 });
