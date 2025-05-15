@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useState } from "react";
-
+import Cookies from 'js-cookie';
 
 export  let productContext=createContext(0)
 
@@ -15,6 +15,13 @@ export  let productContext=createContext(0)
 async function getProducts(){
   return axios.get('http://localhost:8000/api/v1/product/all').then(({data})=>data).catch(err => err)
 }
+   async function getBastsellers(){
+        return axios.get(`http://localhost:8000/api/v1/product/bestSeller`,{
+              headers:{
+                authorization:`Bearer ${Cookies.get('token')}`,
+              }
+          }).then(({data})=>data).catch(err => err)
+      }
 
  export default  function ProductContextProvider({children}){
 
@@ -24,6 +31,7 @@ async function getProducts(){
     return <productContext.Provider
      value={{getProducts,
       reomveProductItem,
+      getBastsellers
       
         }}>
         {children}

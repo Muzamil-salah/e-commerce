@@ -7,6 +7,9 @@ import getByIds from "./services/getById.service.js";
 import GetByProductId from "./services/getByProductId.service.js";
 import addMultiple from "./services/addMultiple.service.js";
 import deleteProduct from "./services/deleteProduct.service.js";
+import bestSeller from "./services/bestSeller.service.js";
+import { authentication , authorization  } from "../../middleware/auth.middleware.js";
+import { endpoint } from "../user/user.endpoint.js";
 const router=Router();
 
 const storage = multer.diskStorage({
@@ -24,8 +27,10 @@ const storage = multer.diskStorage({
 router.post('/add', upload.array('images', 5) , addProduct);
 router.get('/all' , getAllProducts)
 router.post('/getByIds', getByIds)
+router.get('/bestSeller' , authentication() ,bestSeller)
 router.get('/:id' , GetByProductId)
 router.post('/multi' , addMultiple)
 router.delete('/:id' , deleteProduct)
+
 export default router;
 
