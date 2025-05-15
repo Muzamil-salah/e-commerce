@@ -1,5 +1,5 @@
 import mongoose ,{model , Schema} from "mongoose";
-
+import reviewSchema from "./review.model.js";
 const productSchema=new Schema(
     {
         name: {
@@ -73,10 +73,7 @@ const productSchema=new Schema(
             type: Number,
             default: 0,
           },
-          soldQuantity:{
-            type: Number,
-            default:0
-          }
+          reviews: [reviewSchema],
     },
     {timestamps:true}
 );

@@ -8,3 +8,53 @@
   .icon::selection{
     color : green
   }
+
+
+.review-item {
+    border-left: 3px solid #2ff3e0;
+    transition: all 0.3s ease;
+}
+
+.review-item:hover {
+    transform: translateX(5px);
+}
+
+.star-rating {
+    display: inline-block;
+}
+
+.star {
+    cursor: pointer;
+    font-size: 24px;
+    color: #e4e5e9;
+    margin-right: 5px;
+    transition: color 0.2s;
+}
+
+.star.filled {
+    color: #ffc107;
+}
+
+.add-review textarea {
+    background-color: #343a40;
+    color: white;
+    border: 1px solid #495057;
+    transition: all 0.3s ease;
+}
+
+.add-review textarea:focus {
+    background-color: #343a40;
+    color: white;
+    border-color: #2ff3e0;
+    box-shadow: 0 0 0 0.2rem rgba(47, 243, 224, 0.25);
+}
+
+.btn-outline-secondary {
+    border-color: #2ff3e0;
+    color: #2ff3e0;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #2ff3e0;
+    color: #000;
+}

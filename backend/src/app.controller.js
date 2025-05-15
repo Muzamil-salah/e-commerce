@@ -6,6 +6,7 @@ import cartController from './modules/cart/cart.controller.js'
 import categoryController from './modules/category/category.controller.js'
 import brandController from './modules/brand/brand.controller.js'
 import orderController from './modules/order/order.controller.js'
+import reviewController from './modules/review/review.controller.js'
 import path from 'path'
 import { fileURLToPath } from 'url';
 import cors from 'cors';
@@ -56,6 +57,7 @@ const bootstrap=(app , express)=>{
     app.use('/api/v1/category' , categoryController)
     app.use('/api/v1/brand' , brandController)
     app.use('/api/v1/order' , orderController)
+    app.use('/api/v1/review' , reviewController)
 
 
 
