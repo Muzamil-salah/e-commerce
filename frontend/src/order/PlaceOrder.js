@@ -65,6 +65,7 @@ export default function PlaceOrder() {
       };
 
       const data = await createOrder(orderData);
+ console.log(data);
  
 
       if (data.status === 'success') {
@@ -73,6 +74,9 @@ export default function PlaceOrder() {
         await deleteCart();
         toast.success('Order placed successfully!');
         navigate(`/order/${data.createdOrder._id}`);
+      }
+      else{
+        toast.warning('please enter valid data!!');
       }
     } catch (error) {
       console.log(error);

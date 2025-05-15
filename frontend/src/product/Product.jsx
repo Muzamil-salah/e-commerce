@@ -133,7 +133,8 @@ async function addProductToWishList(productId){
           </div>
           <div>
           <i className="fa-solid fa-star ratingColor"></i>
-            {item.ratingsAverage}
+            {/* {item.rating} */}
+            {typeof item.rating === 'number' ? item.rating.toFixed(1) : '0.0'}
           </div>
         </div>
         {/* end details */}
