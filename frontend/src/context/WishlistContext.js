@@ -1,6 +1,5 @@
 import axios from "axios";
 import { createContext, useState } from "react";
-import { baseURL } from "../utiles/baseUrl";
 import Cookies from 'js-cookie';
 
 

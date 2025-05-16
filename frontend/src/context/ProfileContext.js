@@ -15,10 +15,6 @@ async function getProfileData(){
       }).then(({data})=>data).catch(err => err)
   }
 
-
-
-
-
  export default  function ProfileContextProvider({children}){
     let [userData, setUserData] = useState({});
     return <ProfileContext.Provider

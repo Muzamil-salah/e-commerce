@@ -6,7 +6,6 @@ import Cart from './cart/Cart'
 import MainLayOut from './layouts/MainLayOut'
 import NotFoundPage from './NotFoundPage/NotFoundPage'
 import Categories from './categories/Categories'
-import Brands from './brands/Brands'
 import AuthLayOut from './layouts/AuthLayOuts/AuthLayOut'
 import Signin from './signin/Signin'
 import SignUp from './signup/SignUp'
@@ -20,15 +19,12 @@ import WishListContextProvider from './context/WishlistContext'
 import ProductContextProvider from './context/ProductContext.js'
 import ProfileContextProvider from './context/ProfileContext.js'
 import { PaymentProvider } from './context/PaymentContext.js'
-import Phone from './categories/phone/Phone'
 import Laptop from './categories/laptop/Laptop'
 import Camera from './categories/camera/Camera'
-import Headphone from './categories/headphone/Headphone'
 import WishList from './wishlist/WishList'
 import { ToastContainer } from 'react-toastify';
 import EmptyCart from './EmptyCart/EmptyCart'
 import Profile from './profile/Profile'
-import Address from './address/Address'
 import EditProfile from './editProfile/EditProfile'
 import ChangePassword from './editProfile/changePassword/ChangePassword.jsx'
 import CategoryLayOut from './layouts/categoryLayOut/CategoryLayOut'
@@ -61,7 +57,6 @@ export default function App() {
       { path:'wishlist',element:<ProtectedRoutes><WishList/></ProtectedRoutes>},
       { path:'emptycart' , element:<ProtectedRoutes><EmptyCart/></ProtectedRoutes>},
       { path:'Profile' , element:<ProtectedRoutes><Profile/></ProtectedRoutes>},
-      { path:'address/:id',element:<ProtectedRoutes><Address/></ProtectedRoutes>},
       { path:'editprofile',element:<ProtectedRoutes><EditProfile/>  </ProtectedRoutes>},
       {path:'changepassword', element : <ProtectedRoutes><ChangePassword/>  </ProtectedRoutes>},
       {path:'placeorder' , element:<ProtectedRoutes><PlaceOrder/>  </ProtectedRoutes>},

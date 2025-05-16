@@ -11,11 +11,6 @@ export  let CategoryContext=createContext(0)
   return axios.get('http://localhost:8000/api/v1/category/all').then(({data})=>data).catch(err => err)
 }
 
-
-
-
-
-
  export default  function CategoryContextProvider({children}){
     return <CategoryContext.Provider
      value={{

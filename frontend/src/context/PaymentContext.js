@@ -27,43 +27,6 @@ export const PaymentProvider = ({ children }) => {
     }
   };
 
-  //Create PayPal payment
-  // const createPayPalPayment = async (id) => {
-  //   try {
-  //     console.log('im in createPayPalPayment function in payment context');
-      
-  //     setLoading(true);
-  //     const response  = await axios.post(`http://localhost:8000/api/v1/order/payment/paypal/create/${id}`,{},{
-  //                   headers:{
-  //                     authorization:`Bearer ${Cookies.get('token')}`,
-  //                   }
-  //               }).then(({data})=>data).catch(err => err)
-  //                   console.log(response);
-       
-  //   if (response.data.approvalUrl) {
-  //      Cookies.set('paymentId', response.data.paymentId);
-  //      let paymentId=Cookies.get('paymentId')
-  //      console.log('paymentId :  '+paymentId);
-       
-      
-  //     window.location.href = response.data.approvalUrl;
-
-  //   } else {
-  //     throw new Error('No approval URL received');
-  //   }
-
-      
-  //     return response.data;
-  //   } catch (error) {
-  //     console.log(error.response?.data);
-      
-  //     setError(error.response?.data?.message || 'PayPal payment creation failed');
-  //     throw error;
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
    async function createPayPalPayment(id) {
   try {
     Cookies.set('orderId' ,id)

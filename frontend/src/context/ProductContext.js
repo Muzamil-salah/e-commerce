@@ -1,6 +1,5 @@
 import React from 'react'
 import { createContext, useState } from "react";
-import { baseURL } from "../utiles/baseUrl";
 import axios from "axios";
 
 export  let productContext=createContext(0)

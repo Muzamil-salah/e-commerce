@@ -1,6 +1,5 @@
 import axios from "axios";
 import { createContext, useState } from "react";
-import { baseURL } from "../utiles/baseUrl";
 import Cookies from 'js-cookie';
 
 
@@ -21,17 +20,6 @@ export  let orderContext=createContext(0)
 
    async function getOrderById(){
         return axios.get('http://localhost:8000/api/v1/order/getById',{
-              headers:{
-                authorization:`Bearer ${Cookies.get('token')}`,
-              }
-          }).then(({data})=>data).catch(err => err)
-      }
-  
-
-
-      // function remove from Wish list
-   async function removeWishItem(productId){
-        return axios.delete(`http://localhost:8000/api/v1/wishlist/delete/${productId}`,{
               headers:{
                 authorization:`Bearer ${Cookies.get('token')}`,
               }

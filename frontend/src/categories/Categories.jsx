@@ -5,12 +5,10 @@ import { useQuery } from 'react-query'
 import axios from 'axios'
 import CategoryNavbar from './categoryNavbar/CategoryNavbar'
 import Camera from './camera/Camera.jsx'
-import Laptop from './laptop/Laptop.jsx'
-import HeadPhones from './headphone/HeadPhones.jsx'
+
 
 export default function Categories() {
-  let [Loading , setLoading]=useState(true)
-  let {getCategories}= useContext(CategoryContext)
+
     function getCategoriess(){
       return axios.get('http://localhost:8000/api/v1/category/all')
     }

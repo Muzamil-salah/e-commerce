@@ -1,6 +1,5 @@
 import axios from "axios";
 import { createContext, useState } from "react";
-import { baseURL } from "../utiles/baseUrl";
 import Cookies from 'js-cookie';
 
 export  let storeContext=createContext(0)
@@ -49,19 +48,6 @@ async function UpdateQuantity(productId , operation){
 }
 
 
-// function to place order
-async function Pay(cartId , shippingAddress){
-  return axios.post(baseURL + 'orders/checkout-session/' + cartId,{shippingAddress} ,{
-   headers:{
-     token:Cookies.get('token')
-   }
-  })
- .then(({data})=>data).catch(err => err)
-}
-
-
-
-
 // function Delete cart
 async function deleteCart(){
   return axios.delete('http://localhost:8000/api/v1/cart/reset',{
@@ -71,41 +57,6 @@ async function deleteCart(){
   })
  .then(({data})=>data).catch(err => err)
 }
-
-
-
-const createOrder = async (orderData) => {
-  try {
-    const { data } = await axios.post(`/orders`, orderData, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    return data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-const getOrder = async (orderId) => {
-  try {
-    const { data } = await axios.get(`/orders/${orderId}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    return data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-const getMyOrders = async () => {
-  try {
-    const { data } = await axios.get(`/orders/me`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    return data;
-  } catch (error) {
-    throw error;
-  }
-};
 
 
  export default  function StoreContextProvider({children}){
@@ -127,11 +78,7 @@ const getMyOrders = async () => {
         getCart ,
         reomveCartItem ,
         UpdateQuantity ,
-        Pay ,
         deleteCart,
-        createOrder,
-  getOrder,
-  getMyOrders
         }}>
         {children}
 
