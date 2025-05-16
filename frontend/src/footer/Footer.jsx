@@ -8,7 +8,6 @@ export default function Footer() {
                 <div className="row bg-blackAndGray pb-4 ">
                     <div className="col-md-5 text-center">
                     <img className='w-25 me-md-5 ' src={logoImg}alt="ElectroniXpress" />
-                    <h4 className='text-white'> Unleash the Power of Technology</h4>
                     <h6 className='main-color'>Clothes X Clothes@Ecommerce.com</h6>
                     </div>
                     <div className="col-md-2 text-white fs-6">
