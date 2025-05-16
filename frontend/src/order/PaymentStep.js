@@ -153,13 +153,13 @@ const PaymentStep = ({ order, paymentMethod }) => {
       {paymentMethod === 'CashOnDelivery' && (
         <div className="alert alert-info">
           You selected Cash on Delivery. No payment is required now.
-          <button 
+          {/* <button 
             className="btn bg-main text-white w-100 mt-2"
             onClick={handleCashOnDelivery}
             disabled={isProcessing}
           >
             {isProcessing ? 'Processing...' : 'Confirm Order'}
-          </button>
+          </button> */}
         </div>
       )}
     </div>

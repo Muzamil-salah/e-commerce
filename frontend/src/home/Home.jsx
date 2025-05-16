@@ -8,7 +8,7 @@ import phone_Category from "../assets/HomePageImgs/phones/phone-Category.jpg";
 import laptop_Category from "../assets/HomePageImgs/laptops/laptop-Category.jpg";
 import headphone_Category from "../assets/HomePageImgs/HeadPhones/headPhoneCategory.jpg";
 import camera_Category from "../assets/HomePageImgs/cameras/camers-Category.jpg";
-import discound_img from "../assets/images/banner-image3.png";
+import discound_img from "../assets/images/model.png";
 import { Link  , useLocation} from "react-router-dom";
 import Footer from "../footer/Footer";
 import axios from "axios";
@@ -129,39 +129,39 @@ export default function Home() {
             </div>
             <div className="row gy-4 my-5">
               {/* phone */}
-              <div className="col-lg-3 col-md-6  d-flex justify-content-center">
+              <div className="col-lg-4 col-md-3  d-flex justify-content-center">
                 <div className="w-75 text-center  py-4 cursor-pointer rounded-3 main-color-border product text-white align-content-center">
-                  <img className="w-50 mb-3" src={phone_Category} alt="" />
-                  <h5>Phones</h5>
+                  <img className="w-50 mb-3" src='https://assets.adidas.com/images/w_600,f_auto,q_auto/2b04943c525e4909a7a5a9fa0116153d_9366/Five_Ten_Kestrel_Lace_Mountain_Bike_Shoes_Grey_BC0770_01_standard.jpg' alt="shose" />
+                  <h5>Shose</h5>
                 </div>
               </div>
 
               {/*laptop  */}
 
-              <div className="col-lg-3 col-md-6  d-flex justify-content-center">
+              <div className="col-lg-4 col-md-3  d-flex justify-content-center">
                 <div className="w-75 text-center  cursor-pointer rounded-3 main-color-border product text-white align-content-center">
-                  <img className="w-75  mb-3" src={laptop_Category} alt="" />
-                  <h5>Laptop</h5>
+                  <img className="w-75  mb-3" src='https://assets.adidas.com/images/w_600,f_auto,q_auto/a520df1b51384c00af9caca100489f04_9366/Trefoil_Backpack_Black_EX6752_01_standard.jpg' alt="" />
+                  <h5>Accessories</h5>
                 </div>
               </div>
 
               {/* head phones */}
 
-              <div className="col-lg-3 col-md-6  d-flex justify-content-center">
+              <div className="col-lg-4 col-md-3  d-flex justify-content-center">
                 <div className="w-75 text-center cursor-pointer rounded-3 main-color-border product text-white align-content-center">
-                  <img className="w-50 mb-3" src={headphone_Category} alt="" />
-                  <h5>Phones</h5>
+                  <img className="w-50 mb-3" src='https://assets.adidas.com/images/w_600,f_auto,q_auto/9f081356674948ca99f3ac820134738c_9366/Essentials_Loose_Logo_Tank_Top_White_GL0567_21_model.jpg' alt="" />
+                  <h5>Clothes</h5>
                 </div>
               </div>
 
               {/* camera */}
 
-              <div className="col-lg-3 col-md-6  d-flex justify-content-center">
+              {/* <div className="col-lg-3 col-md-6  d-flex justify-content-center">
                 <div className="w-75 text-center  cursor-pointer rounded-3 main-color-border product text-white align-content-center">
                   <img className="w-50 mb-3" src={camera_Category} alt="" />
                   <h5>Phones</h5>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
@@ -187,7 +187,7 @@ export default function Home() {
 
               <div className="col-md-5 text-white align-content-center">
                 <h2 className=" fs-1">
-                  <span className="main-color">30%</span> Discount on apple
+                  <span className="main-color">30%</span> Discount on Nike
                   collection
                 </h2>
                 <span className=" fs-6">Harry Up And Book This Offer</span>

@@ -134,7 +134,8 @@ export default function Camera() {
             </div>
             <div>
               <i className="fa-solid fa-star ratingColor"></i>
-              {item.rating}
+              {/* {item.rating} */}
+               {typeof item.rating === 'number' ? item.rating.toFixed(1) : '0.0'}
             </div>
           </div>
           {/* end details */}

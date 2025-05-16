@@ -1,8 +1,8 @@
 import React from "react";
 import Slider from "react-slick";
 import styles from "./MainSlider.module.css";
-import banner_1 from "../assets/images/banner-image.png";
-import banner_3 from "../assets/images/banner-image2.png";
+import banner_1 from "../assets/images/shoes.png";
+import banner_3 from "../assets/images/bag.png";
 import { Link } from "react-router-dom";
 import './MainSlider.module.css'
 export default function MainSlider() {
@@ -28,9 +28,9 @@ export default function MainSlider() {
           >
             <div className="offset-md-1">
               <div className="banner-content text-white p-2">
-                <h2>GoPro hero9 Black</h2>
+                <h2>ZX 2K Boost 2.0 Shoes</h2>
                 <p>Limited stocks available. Grab it now!</p>
-                <Link to="/products" style={{ textDecoration: 'none' , color:"black" }} className=" collection bg-main mt-3 rounded-3 p-2 ">
+                <Link to="/camera" style={{ textDecoration: 'none' , color:"black" }} className=" collection bg-main mt-3 rounded-3 p-2 ">
                  Shop Collection
                 </Link>
               </div>
@@ -49,10 +49,10 @@ export default function MainSlider() {
           >
             <div className="offset-md-1 p-2">
               <div className="banner-content text-white ">
-                <h2>Macbook Collection</h2>
+                <h2>Adidas Collection</h2>
                 <p>Limited stocks available. Grab it now!</p>
 
-                <Link to="/products" style={{ textDecoration: 'none' , color:"black" }} className=" collection bg-main mt-3 rounded-3 p-2 ">
+                <Link to="/laptop" style={{ textDecoration: 'none' , color:"black" }} className=" collection bg-main mt-3 rounded-3 p-2 ">
                  Shop Collection
                 </Link>
               </div>
