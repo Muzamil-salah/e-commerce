@@ -422,8 +422,11 @@ export default function ProductDetails() {
                                 <div className='ms-3'>{data?.data?.product.rating?.toFixed(1)}</div>
                             </div>
                         </div>
+                        <p className={`fs-6 fw-semibold m-0 ${data?.data?.product.countInStock === 0 ? 'text-danger' : 'main-color'}`}>
+  {data?.data?.product.countInStock === 0 ? 'Not available' : `In Stock: ${data?.data?.product.countInStock}`}
+</p>
                         <button 
-                            disabled={!btnLoading} 
+                            disabled={!btnLoading || data?.data?.product.countInStock === 0} 
                             onClick={() => addProductToCart(data?.data?.product._id)} 
                             className='icon btn bg-main w-100 border-secondary'
                         >

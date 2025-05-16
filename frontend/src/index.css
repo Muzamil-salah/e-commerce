@@ -27,7 +27,7 @@ body {
  color: var(--mainColor);
 }
 .bg-main{
-  background-color: var(--mainColor);
+  background-color: var(--mainColor) !important;
 }
 .Gray-Color{
   background-color: var(--gray);
@@ -97,13 +97,13 @@ border: solid 2px var(--mainColor);
 }
 .product .btn:hover{
   background-color: white;
-  color:var(--mainColor) !important;
+  /* color:var(--mainColor) !important; */
   border: 2px solid var(--mainColor);
 }
 .ProductDetails .btn:hover{
   background-color: white;
-  color:var(--mainColor) !important;
-  border: 3px solid var(--mainColor) !important;
+  /* color:var(--mainColor) !important; */
+  /* border: 3px solid var(--mainColor) !important; */
 }
 .cursor-pointer{
   cursor: pointer;

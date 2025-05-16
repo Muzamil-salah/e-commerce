@@ -23,6 +23,14 @@ async function getProducts(){
           }).then(({data})=>data).catch(err => err)
       }
 
+   async function updateProduct(productId , updates){
+        return axios.put(`http://localhost:8000/api/v1/product/update/${productId}`,updates,{
+              headers:{
+                authorization:`Bearer ${Cookies.get('token')}`,
+              }
+          }).then(({data})=>data).catch(err => err)
+      }
+
  export default  function ProductContextProvider({children}){
 
     const [Counter , setCounter]=useState(0)
@@ -31,7 +39,8 @@ async function getProducts(){
     return <productContext.Provider
      value={{getProducts,
       reomveProductItem,
-      getBastsellers
+      getBastsellers,
+      updateProduct
       
         }}>
         {children}
