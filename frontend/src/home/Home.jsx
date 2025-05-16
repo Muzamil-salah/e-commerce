@@ -191,7 +191,7 @@ export default function Home() {
                   collection
                 </h2>
                 <span className=" fs-6">Harry Up And Book This Offer</span>
-                <Link to="/products" className="btn  d-block bg-main mt-5">
+                <Link to="/laptop" className="btn  d-block bg-main mt-5">
                   Shop Collection
                 </Link>
               </div>
