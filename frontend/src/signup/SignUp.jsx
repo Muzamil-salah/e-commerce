@@ -98,7 +98,7 @@ if(!values.phone){
              {/*//////////////////////////////////////////////////////////// start logo  /////////////////////////////////// */}
             <div className="col-md-6  text-center text-white mb-5">
               <img className='w-25 me-md-5 ' src={logoImg}alt="ElectroniXpress" />
-              <h2 className='mt-3 me-4'>ElectroniXpress</h2> <span >helps you find all electronics you need</span>
+              <h2 className='mt-3 me-4'>Clothes X Clothes</h2> <span >helps you find all electronics you need</span>
                {/*//////////////////////////////////////////////////////////// end logo  /////////////////////////////////// */}
             </div>
             <div className={`${styles.MyForm}   col-md-6 bg-black text-light p-4 mt-s-5`}>

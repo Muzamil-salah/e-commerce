@@ -8,7 +8,7 @@ export default function AuthLayOut() {
     <>
      <nav className={` ${styles.bg} navbar navbar-expand-lg py-3 fixed-top`}>
         <div className="container-fluid ">
-          <img src={logo} alt="ElectroniXpress" /><h3 className='me-5'>ElectroniXpress</h3>
+          <img src={logo} alt="ElectroniXpress" /><h3 className='me-5'>Clothes X Clothes</h3>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon" />
           </button>

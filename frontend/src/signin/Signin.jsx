@@ -94,7 +94,7 @@ export default function Signin() {
           {/* Logo Section */}
           <div className="col-md-6 text-center text-white mb-5">
             <img className='w-25 me-md-5' src={logoImg} alt="ElectroniXpress" />
-            <h2 className='mt-3 me-4'>ElectroniXpress</h2>
+            <h2 className='mt-3 me-4'>Clothes X Clothes</h2>
             <span>helps you find all electronics you need</span>
           </div>
           
