@@ -17,26 +17,44 @@ import ProductContextProvider from './context/ProductContext.js'
 import Offers from './admin/Offers/Offers.jsx'
 import LiveOrders from './admin/liveOrders/LiveOrders.jsx'
 import BestSeller from './admin/bestSeller/BestSeller.jsx'
-
+import OrderDetails from './admin/orderDetails/OrderDetails.js'
+import OrderContextProvider from './context/OrderContext.js'
 
 export default function App() {
-  const routes = createBrowserRouter([
+  // const routes = createBrowserRouter([
  
-    { index:true,element:<Admin/>},
-      {path:'admin',element:<Admin/>},
-      { path:'offers', element:<Offers/> },
-      { path:'liveOrders', element:<LiveOrders/> },
-      { path:'bestSeller', element:<BestSeller/> },
-      { path:'manageProducts', element:<ManageProducts/> },
-      {path:'addProduct' , element :<AddProduct/>  },
-      { path:'products',element:<Products/>},
-     { path:'cart',element:<Cart/>},
-      {path:'category',element:<Categories/>},
+  //   { index:true,element:<Admin/>},
+  //     {path:'admin',element:<Admin/>},
+  //     { path:'offers', element:<Offers/> },
+  //     { path:'liveOrders', element:<LiveOrders/> },
+  //     { path:'bestSeller', element:<BestSeller/> },
+  //     { path:'manageProducts', element:<ManageProducts/> },
+  //     {path:'addProduct' , element :<AddProduct/>  },
+  //     { path:'products',element:<Products/>},
+  //    { path:'cart',element:<Cart/>},
+  //     {path:'category',element:<Categories/>},
+  //     {path:'order/:orderId' , element:<OrderDetails/>}
 
      
     
    
-  ])
+  // ])
+
+
+  const routes = createBrowserRouter([
+  { path: "/", element: <Admin /> },
+  { path: "/admin", element: <Admin /> },
+  { path: "/offers", element: <Offers /> },
+  { path: "/liveOrders", element: <LiveOrders /> },
+  { path: "/bestSeller", element: <BestSeller /> },
+  { path: "/manageProducts", element: <ManageProducts /> },
+  { path: "/addProduct", element: <AddProduct /> },
+  { path: "/products", element: <Products /> },
+  { path: "/cart", element: <Cart /> },
+  { path: "/category", element: <Categories /> },
+  { path: "/order/:orderId", element: <OrderDetails /> },
+]);
+
   return (
     <>
 
@@ -46,7 +64,9 @@ export default function App() {
     <ToastContainer theme='colored' autoClose={400}/>
     <StoreContextProvider>
   <ProductContextProvider>
+    <OrderContextProvider>
       <RouterProvider router={routes}/>
+      </OrderContextProvider>
       </ProductContextProvider>
     </StoreContextProvider>
 
