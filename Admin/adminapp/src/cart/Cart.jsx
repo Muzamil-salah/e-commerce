@@ -70,6 +70,7 @@ async  function deleteMyCart(){
   }, [])
   if(Loading) return <Loader/>
 
+
   return (
     <div className='Dark-Color text-white py-5'>
          <div className=' my-4 pt-4 position-fixed ms-5'>
