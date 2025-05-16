@@ -1,28 +1,11 @@
 
 import Cart from "../../../DB/models/Cart.model.js";
 import Product from "../../../DB/models/Product.model.js";
-import jwt from 'jsonwebtoken';
-
 const updateQuantity = async (req, res, next) => {
     try {
         const { operation } = req.body;
         const productId = req.params.id;
-        const { authorization } = req.headers;
-        const [Bearer, token] = authorization.split(" ") || [];
-        
-        if (!Bearer || !token) {
-            return res.status(400).json({ message: 'Invalid token components' });
-        }
-
-        let signature;
-        switch (Bearer) {
-            case "admin": signature = process.env.TOKEN_SIGNATURE_ADMIN; break;
-            case "Bearer": signature = process.env.TOKEN_SIGNATURE; break;
-            default: return res.status(400).json({ message: 'Invalid token type' });
-        }
-
-        const decoded = jwt.decode(token, signature);
-        const userId = decoded.id;
+        const userId = req.user._id;
 
         // Get product info for stock validation
         const product = await Product.findById(productId);

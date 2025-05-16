@@ -4,19 +4,7 @@ import bcrypt from 'bcrypt';
 const changePassword = async (req, res, next) => {
     try {
         const {currentPassword , newPassword , confirmPassword} = req.body;
-        const { authorization } = req.headers;
-        const [Bearer, token] = authorization.split(" ") || []
-        let signature = undefined;
-        switch (Bearer) {
-            case 'admin': signature = process.env.TOKEN_SIGNATURE_ADMIN;
-                break;
-            case 'Bearer': signature = process.env.TOKEN_SIGNATURE
-                break;
-            default:
-                break
-        }
-        const decoded = jwt.decode(token, signature);
-        const userId = decoded.id;
+        const userId = req.user._id;
         
         const searchUser= await User.findById(userId)
         if(!searchUser){

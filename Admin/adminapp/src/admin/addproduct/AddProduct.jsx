@@ -11,9 +11,6 @@ export default function AddProduct() {
   // const [image, setImage] = useState(null);
   const [selectedFiles, setSelectedFiles] = useState([]);
 
-  // const handleImageChange = (e) => {
-  //     setImage(e.target.files[0]);
-  // };
 
   const handleFileChange = (e) => {
     // setSelectedFiles(e.target.files);

@@ -3,10 +3,6 @@ import { createContext, useState } from "react";
 import Cookies from 'js-cookie';
 
 export  let productContext=createContext(0)
-
-
-
-
 // function Remove product
  async function reomveProductItem(productId){
   return axios.delete(`http://localhost:8000/api/v1/product/${productId}`).then(({data})=>data).catch(err => err)
@@ -32,9 +28,6 @@ async function getProducts(){
       }
 
  export default  function ProductContextProvider({children}){
-
-    const [Counter , setCounter]=useState(0)
-
 
     return <productContext.Provider
      value={{getProducts,

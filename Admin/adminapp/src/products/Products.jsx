@@ -32,7 +32,6 @@ export default function Products() {
     discount: Yup.number().min(0, 'Discount must be positive').max(100, 'Discount cannot exceed 100'),
   });
 
-  // Fetch products, categories and brands
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -42,7 +41,6 @@ export default function Products() {
           setProductItems(data.products);
         }
         
-        // Mock data for categories and brands
         setCategories(['Shoes', 'Clothing', 'Accessories']);
         setBrands(['Nike', 'Adidas', 'Puma']);
       } catch (error) {
@@ -100,10 +98,10 @@ export default function Products() {
     <div className='bg-blackAndGray'>
       <div className='d-flex justify-content-between px-5 py-5'>
         <Link to="/admin"> 
-          <i className="fa-solid fa-circle-arrow-left main-color fs-2"></i>
+          <i className="fa-solid fa-circle-arrow-left main-color fs-2 position-fixed"></i>
         </Link>
         <Link to="/addProduct" className='un-underline'>
-          <i className="fa-solid fa-plus text-black bg-main rounded-5 p-2"></i>
+          <i className="fa-solid fa-plus text-black bg-main rounded-5 p-2 position-fixed"></i>
         </Link>
       </div>
       
