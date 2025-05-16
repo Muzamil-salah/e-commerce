@@ -69,8 +69,6 @@ async  function deleteMyCart(){
     })()
   }, [])
   if(Loading) return <Loader/>
-  if(cartItems==null) return <EmptyCart/>
-  if(cartItems.numOfCartItems==0)return <EmptyCart/>
 
   return (
     <div className='Dark-Color text-white py-5'>
