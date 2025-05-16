@@ -36,8 +36,8 @@ export default function Products() {
         }
         
         // Mock data for categories and brands
-        setCategories(['Electronics', 'Clothing', 'Home', 'Books']);
-        setBrands(['Apple', 'Samsung', 'Nike', 'Adidas']);
+        setCategories(['Shoes', 'Clothing', 'Accessories']);
+        setBrands(['Nike', 'Adidas', 'Puma']);
       } catch (error) {
         toast.error('Error fetching data');
       }

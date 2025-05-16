@@ -200,7 +200,6 @@ export const createPayPalPayment = async (req, res) => {
 // Verify PayPal payment
 export const verifyPayPalPayment = async (req, res) => {
   try {
-    console.log('i entered here!!!!!');
     
      const { paymentId } = req.query;
     const  orderId  = req.params.orderId;

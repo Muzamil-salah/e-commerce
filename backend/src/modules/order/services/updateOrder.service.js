@@ -1,21 +1,31 @@
 import Order from "../../../DB/models/order.model.js";
-
+import Product from "../../../DB/models/Product.model.js";
 const updateOrder=async(req , res , next)=>{
     try {
+        console.log(
+            'i m in update order service'
+        );
+        
         const updates = req.body;
         const { isPaid ,isDelivered } = req.body;
         const orderId=req.params.orderId;
 
         const orderToUpdate= await Order.findById(orderId)
+    
+        console.log(orderToUpdate.orderItems);
         if(!orderToUpdate){
             return res.status(404).json({status:'fail' , message:'order not found'})
         }
         if(isPaid){
             orderToUpdate.paidAt=Date.now()
+            orderToUpdate.orderItems.forEach(async (item) => {
+            let product= await Product.findById(item.product)
+          let updatedProduct=  await Product.findByIdAndUpdate(product._id , {countInStock:product.countInStock-item.quantity} , {new:true})
+            console.log(updatedProduct);
+        })
         }
         else if(isDelivered){
             orderToUpdate.deliveredAt=Date.now()
-            
         }
 
         const validUpdates = Object.keys(updates).reduce((acc, key) => {
