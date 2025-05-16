@@ -165,7 +165,7 @@ export default function OrderDetails() {
                   <strong>{order.totalPrice.toLocaleString()} EGP</strong>
                 </div>
                 
-                <Link to="/orders"  className="btn btn-outline-main text-white w-100 mt-2">
+                <Link to="/liveOrders"  className="btn btn-outline-main text-white w-100 mt-2">
                   Back to Orders
                 </Link>
               </div>

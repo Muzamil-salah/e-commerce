@@ -22,13 +22,13 @@ export default function CategoryNavbar() {
             <div >
             <ul className="navbar-nav " >
               <li>
-                <NavLink style={{ color: 'white' }} className="nav-link mt-1" to="/camera">Shoes</NavLink>
+                <NavLink style={{ color: 'white' }} className="nav-link mt-1" to="/shoes">Shoes</NavLink>
               </li>
               <li >
-                <NavLink style={{ color: 'white' }} className="nav-link mt-1" to="/headphone">Clothes</NavLink>
+                <NavLink style={{ color: 'white' }} className="nav-link mt-1" to="/clothes">Clothes</NavLink>
               </li>
               <li>
-                <NavLink style={{ color: 'white' }} className="nav-link mt-1" to="/laptop">Accessories</NavLink>
+                <NavLink style={{ color: 'white' }} className="nav-link mt-1" to="/accessories">Accessories</NavLink>
               </li>
        
             </ul>

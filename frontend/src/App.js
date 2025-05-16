@@ -55,9 +55,9 @@ export default function App() {
       {path:'logout',element:<ProtectedRoutes><LogOut/></ProtectedRoutes>},
       {path:'product-details/:id',element:<ProtectedRoutes><ProductDetails/></ProtectedRoutes>},
       // {path:'phone',element:<ProtectedRoutes><Phone/></ProtectedRoutes>},
-      { path:'laptop',element:<ProtectedRoutes><Laptop/></ProtectedRoutes>},
-      { path:'camera',element:<ProtectedRoutes><Camera/></ProtectedRoutes>},
-      { path:'headphone',element:<ProtectedRoutes><HeadPhones/></ProtectedRoutes>},
+      { path:'accessories',element:<ProtectedRoutes><Laptop/></ProtectedRoutes>},
+      { path:'shoes',element:<ProtectedRoutes><Camera/></ProtectedRoutes>},
+      { path:'clothes',element:<ProtectedRoutes><HeadPhones/></ProtectedRoutes>},
       { path:'wishlist',element:<ProtectedRoutes><WishList/></ProtectedRoutes>},
       { path:'emptycart' , element:<ProtectedRoutes><EmptyCart/></ProtectedRoutes>},
       { path:'Profile' , element:<ProtectedRoutes><Profile/></ProtectedRoutes>},
@@ -87,9 +87,9 @@ export default function App() {
     // }
     {path:'/', element:<CategoryLayOut/>,errorElement:<NotFoundPage/>,children:[
       
-      {  path:'laptop' , element:<Laptop/>},
-      {  path:'camera' , element:<Camera/>},
-     { path:'headphone', element :<HeadPhones/>}
+      {  path:'accessories' , element:<Laptop/>},
+      {  path:'shoes' , element:<Camera/>},
+     { path:'clothes', element :<HeadPhones/>}
     ]
       
     }

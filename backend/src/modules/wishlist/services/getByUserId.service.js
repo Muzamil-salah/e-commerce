@@ -28,12 +28,12 @@ const findByUserId = async (req, res, next) => {
         
         // Find wishlist and populate products
         const wishlist = await Wishlist.findOne({ user: userId }).populate('products');
+        console.log(wishlist);
         
         if (!wishlist) {
-            return res.status(200).json({
-                status: 'success',
-                wishlistItems: [],
-                length: 0
+            return res.status(404).json({
+                status: 'fail',
+                message:'wishList is empty'
             });
         }
 

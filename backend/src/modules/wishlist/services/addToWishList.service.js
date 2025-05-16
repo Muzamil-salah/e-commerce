@@ -8,6 +8,11 @@ const addToWishlist = async (req, res, next) => {
         const productId = req.params.id;
         const { authorization } = req.headers;
         const [Bearer, token] = authorization.split(" ") || [];
+
+        const productToBeAdded= await Product.findById(productId)
+        if(!productToBeAdded){
+            return res.status(404).json({status:'fail' , message:'product not found'})
+        }
         
         if (!token || !Bearer) {
             return res.status(400).json({ message: "Invalid token components" });

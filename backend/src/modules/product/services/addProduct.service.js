@@ -10,6 +10,8 @@ const addProduct=async (req, res) => {
   if (!req.body.name || !req.body.price || !req.body.description || !req.body.category || !req.body.countInStock) {
     return res.status(400).json({ message: 'All fields are required' });
   }
+  console.log(category);
+  
 
   const categoryName= await Category.findOne({name:category})
   // const categoryName= await category.findOne({name:category})

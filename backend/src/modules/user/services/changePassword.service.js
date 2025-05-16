@@ -17,6 +17,7 @@ const changePassword = async (req, res, next) => {
         }
         const decoded = jwt.decode(token, signature);
         const userId = decoded.id;
+        
         const searchUser= await User.findById(userId)
         if(!searchUser){
             return res.status(404).json({message:'user not found ' , status:'fail'})

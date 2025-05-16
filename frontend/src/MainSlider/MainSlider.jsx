@@ -30,7 +30,7 @@ export default function MainSlider() {
               <div className="banner-content text-white p-2">
                 <h2>ZX 2K Boost 2.0 Shoes</h2>
                 <p>Limited stocks available. Grab it now!</p>
-                <Link to="/camera" style={{ textDecoration: 'none' , color:"black" }} className=" collection bg-main mt-3 rounded-3 p-2 ">
+                <Link to="/shoes" style={{ textDecoration: 'none' , color:"black" }} className=" collection bg-main mt-3 rounded-3 p-2 ">
                  Shop Collection
                 </Link>
               </div>
@@ -52,7 +52,7 @@ export default function MainSlider() {
                 <h2>Adidas Collection</h2>
                 <p>Limited stocks available. Grab it now!</p>
 
-                <Link to="/laptop" style={{ textDecoration: 'none' , color:"black" }} className=" collection bg-main mt-3 rounded-3 p-2 ">
+                <Link to="/accessories" style={{ textDecoration: 'none' , color:"black" }} className=" collection bg-main mt-3 rounded-3 p-2 ">
                  Shop Collection
                 </Link>
               </div>
