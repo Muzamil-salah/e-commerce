@@ -35,8 +35,6 @@ export default function AddProduct() {
     formData.append("brand", values.brand);
     formData.append("price", values.price);
     formData.append("countInStock", values.countInStock);
-    formData.append("rating", values.rating);
-    formData.append("numReviews", values.numReviews);
     // formData.append('image', image);
     for (let i = 0; i < selectedFiles.length; i++) {
       formData.append("images", selectedFiles[i]);
@@ -90,12 +88,6 @@ export default function AddProduct() {
     if (!values.countInStock) {
       myError.countInStock = "Count In Stock is required";
     }
-    if (!values.rating) {
-      myError.rating = "Rating is required";
-    }
-    if (!values.numReviews) {
-      myError.numReviews = "NumReviews is required";
-    }
     if (!values.images) {
       myError.images = "one or more image is required";
     }
@@ -113,8 +105,6 @@ export default function AddProduct() {
       brand: "",
       price: "",
       countInStock: "",
-      rating: "",
-      numReviews: "",
       images: "",
     },
     validate,
@@ -154,17 +144,14 @@ export default function AddProduct() {
             <option className="text-dark" value="">
               Select Category
             </option>
-            <option className="text-dark" value="phones">
-              Phones
+            <option className="text-dark" value="Shoes">
+              Shoes
             </option>
-            <option className="text-dark" value="laptop">
-              laptop
+            <option className="text-dark" value="Clothes">
+              Clothes
             </option>
-            <option className="text-dark" value="cameras">
-              cameras
-            </option>
-            <option className="text-dark" value="headphones">
-              headphones
+            <option className="text-dark" value="Accessories">
+              Accessories
             </option>
           </select>
           {Register.errors.category && Register.touched.category ? (
@@ -322,7 +309,7 @@ export default function AddProduct() {
           {/* ----------------------------------------------- end count in stock ---------------------------------- */}
 
           {/* ----------------------------------------------- start rating  ---------------------------------- */}
-          <input
+          {/* <input
             onBlur={Register.handleBlur}
             value={Register.values.rating}
             onChange={Register.handleChange}
@@ -340,11 +327,11 @@ export default function AddProduct() {
             <div className="alert alert-danger">{Register.errors.rating}</div>
           ) : (
             ""
-          )}
+          )} */}
           {/* ----------------------------------------------- end rating  ---------------------------------- */}
 
           {/* ----------------------------------------------- start numReviews  ---------------------------------- */}
-          <input
+          {/* <input
             onBlur={Register.handleBlur}
             value={Register.values.numReviews}
             onChange={Register.handleChange}
@@ -364,7 +351,7 @@ export default function AddProduct() {
             </div>
           ) : (
             ""
-          )}
+          )} */}
           {/* ----------------------------------------------- end numReviews  ---------------------------------- */}
 
           {/* ----------------------------------------------- start image  ---------------------------------- */}

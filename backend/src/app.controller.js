@@ -10,6 +10,7 @@ import reviewController from './modules/review/review.controller.js'
 import path from 'path'
 import { fileURLToPath } from 'url';
 import cors from 'cors';
+import fs from 'fs'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -34,14 +35,15 @@ const bootstrap=(app , express)=>{
         },
         credentials: true
       }));
+  console.log("__dirname" , __dirname);
 
-  
-      //to make my images visible to anyone use my web application
-      console.log(__dirname);
-      
-      
-      app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+      const uploadsPath =path.join(__dirname, '../uploads');
+      console.log('Serving static files from:', uploadsPath);
+      if (!fs.existsSync(uploadsPath)) {
+  fs.mkdirSync(uploadsPath, { recursive: true });
+}
 
+     app.use('/uploads', express.static(uploadsPath));
 
     app.get('/',(req,res,next)=>{
         return res.status(200).json({

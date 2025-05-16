@@ -14,6 +14,13 @@ export default function Products() {
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
 
+  const getImageUrl = (imagePath) => {
+  if (!imagePath) return '/placeholder-image.jpg';
+  // Check if it's already a full URL (for seeded data maybe)
+  if (imagePath.startsWith('http')) return imagePath;
+  // Otherwise construct the proper URL
+  return `${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/uploads/${imagePath}`;
+};
   // Validation schema
   const productSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
@@ -84,6 +91,8 @@ export default function Products() {
       toast.error(error.message || 'Error updating product');
     } finally {
       setSubmitting(false);
+
+      
     }
   };
 
@@ -99,10 +108,14 @@ export default function Products() {
       </div>
       
       <div className="container main-color-border p-3">
+        
         {productsItems?.map(item => (
+
           <div key={item._id} className="row border-bottom py-2">
+            {      console.log('Image path:', item.images[0], 'Full URL:', getImageUrl(item.images[0]))}
             <div className="col-md-1">
-              <img className='w-100' src={item.images[0]} alt={item.name} />
+              {/* src={item.images[0] ||`http://localhost:8000/uploads/${item.images[0]}`} */}
+              <img className='w-100' src={getImageUrl(item.images?.[0])}  alt={item.name} />
             </div>
             <div className="col-md-8 d-flex justify-content-between align-items-center">
               <div className='px-4'>

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import multer from 'multer';
+import fs from 'fs';
 import path from 'path';
 import addProduct from "./services/addProduct.service.js";
 import getAllProducts from "./services/getAllProducts.service.js";
@@ -22,6 +23,8 @@ const storage = multer.diskStorage({
       cb(null, uniqueSuffix + path.extname(file.originalname)); // مثلا: 171234234.png
     }
   });
+
+
   const upload = multer({ storage: storage });
 
 
