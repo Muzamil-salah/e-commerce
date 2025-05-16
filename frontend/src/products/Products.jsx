@@ -40,23 +40,6 @@ export default function Products() {
     }, []);
 
 
-// console.log(data);
-
-// console.log(data)
-// console.log(isLoading)
-
-//   let [Products , setProducts]=useState([])
-//   let [loading, setLoading]=useState(true);
-//  async function getProducts(){
-//   let {data}=await axios.get('https://ecommerce.routemisr.com/api/v1/products')
-//   console.log(data.data)
-//   setProducts(data.data)
-//   setLoading(false);
-//   }
-//   useEffect(() =>{
-//     getProducts()
-//   },[]);
-
   if(isLoading) return <Loader/>
   return (
     <div className='Dark-Color pt-5'>

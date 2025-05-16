@@ -29,6 +29,15 @@ export default function Product({ item }) {
   } = useContext(WishListContext);
 
   let [btnLoading, setBtnLoading] = useState(true);
+
+
+    const getImageUrl = (imagePath) => {
+  if (!imagePath) return '/placeholder-image.jpg';
+  // Check if it's already a full URL (for seeded data maybe)
+  if (imagePath.startsWith('http')) return imagePath;
+  // Otherwise construct the proper URL
+  return `${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/uploads/${imagePath}`;
+};
   // const [isLoved, setIsLoved] = useState([]);
   // const [inCart, setInCart] = useState([]);
 
@@ -48,7 +57,6 @@ export default function Product({ item }) {
 
   // }
   // useEffect(() => {
-  //   // هنا بتحطي الفانكشن اللي تشتغل مرة واحدة بس
   //   getPrevValues()
 
   // }, []);
@@ -123,7 +131,8 @@ export default function Product({ item }) {
         <div className="product h-10 text-white p-2 cursor-pointer rounded-3 gray-border my-3">
           {/* start link to product details */}
           <Link className="un-underline" to={"/product-details/" + item._id}>
-            <img className="w-100" src={item.images[0]} alt="" />
+          {/* src={item.images[0]}  */}
+            <img className="w-100" src={getImageUrl(item.images?.[0])} alt="" />
             {/* <span className='main-color'>{item.category.name}</span> */}
             <h5 className="my-2 fw-bold">
               {item.description.split(" ").slice(0, 2).join(" ")}

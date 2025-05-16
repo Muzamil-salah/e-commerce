@@ -26,5 +26,5 @@ categorySchema.set("toJSON", {
   virtuals: true,
 });
 
-const Category = mongoose.model("Category", categorySchema) || mongoose.models.Category;;
+const Category = mongoose.model("Category", categorySchema) || mongoose.models.Category;
 export default Category

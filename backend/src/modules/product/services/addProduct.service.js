@@ -1,6 +1,7 @@
 import multer from 'multer';
 import path from 'path';
 import Product from '../../../DB/models/Product.model.js';
+import Category from '../../../DB/models/category.model.js'
 
 
 // Create Product API
@@ -9,6 +10,11 @@ const addProduct=async (req, res) => {
   if (!req.body.name || !req.body.price || !req.body.description || !req.body.category || !req.body.countInStock) {
     return res.status(400).json({ message: 'All fields are required' });
   }
+
+  const categoryName= await Category.findOne({name:category})
+  // const categoryName= await category.findOne({name:category})
+  console.log("categoryName : " +categoryName);
+  
   
   const images = req.files.map(file => file.filename); 
   console.log(images);
@@ -20,7 +26,7 @@ const addProduct=async (req, res) => {
     description,
     detaileddescription,
     brand,
-    category,
+    category:categoryName._id,
     countInStock,
     images // array of filenames
   };
