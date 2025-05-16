@@ -19,6 +19,7 @@ import LiveOrders from './admin/liveOrders/LiveOrders.jsx'
 import BestSeller from './admin/bestSeller/BestSeller.jsx'
 import OrderDetails from './admin/orderDetails/OrderDetails.js'
 import OrderContextProvider from './context/OrderContext.js'
+import ProductDetails from './productDetails/ProductDetails.jsx'
 
 export default function App() {
   // const routes = createBrowserRouter([
@@ -53,6 +54,7 @@ export default function App() {
   { path: "/cart", element: <Cart /> },
   { path: "/category", element: <Categories /> },
   { path: "/order/:orderId", element: <OrderDetails /> },
+  { path: "product-details/:id", element: <ProductDetails /> }
 ]);
 
   return (

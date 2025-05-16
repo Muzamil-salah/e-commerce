@@ -130,7 +130,7 @@ export default function OrderDetails() {
                       <img src={item.product.images[0]} alt={item.product.name} className="img-fluid" />
                     </div>
                     <div className="col-md-5">
-                      <Link to={`/product/${item.product._id}`} className="text-white">
+                      <Link to={`/product-details/${item.product._id}`} className="text-white">
                         {item.product.name}
                       </Link>
                     </div>
