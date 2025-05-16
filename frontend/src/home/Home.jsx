@@ -131,7 +131,7 @@ export default function Home() {
               {/* phone */}
               <div className="col-lg-4 col-md-3  d-flex justify-content-center">
                 <div className="w-75 text-center  py-4 cursor-pointer rounded-3 main-color-border product text-white align-content-center">
-                  <img className="w-50 mb-3" src='https://assets.adidas.com/images/w_600,f_auto,q_auto/2b04943c525e4909a7a5a9fa0116153d_9366/Five_Ten_Kestrel_Lace_Mountain_Bike_Shoes_Grey_BC0770_01_standard.jpg' alt="shose" />
+                 <Link to={'/camera'}> <img className="w-50 mb-3" src='https://assets.adidas.com/images/w_600,f_auto,q_auto/2b04943c525e4909a7a5a9fa0116153d_9366/Five_Ten_Kestrel_Lace_Mountain_Bike_Shoes_Grey_BC0770_01_standard.jpg' alt="shose" /></Link>
                   <h5>Shose</h5>
                 </div>
               </div>
@@ -140,7 +140,7 @@ export default function Home() {
 
               <div className="col-lg-4 col-md-3  d-flex justify-content-center">
                 <div className="w-75 text-center  cursor-pointer rounded-3 main-color-border product text-white align-content-center">
-                  <img className="w-75  mb-3" src='https://assets.adidas.com/images/w_600,f_auto,q_auto/a520df1b51384c00af9caca100489f04_9366/Trefoil_Backpack_Black_EX6752_01_standard.jpg' alt="" />
+                  <Link to={'/laptop'}><img className="w-75  mb-3" src='https://assets.adidas.com/images/w_600,f_auto,q_auto/a520df1b51384c00af9caca100489f04_9366/Trefoil_Backpack_Black_EX6752_01_standard.jpg' alt="" /></Link>
                   <h5>Accessories</h5>
                 </div>
               </div>
@@ -149,7 +149,7 @@ export default function Home() {
 
               <div className="col-lg-4 col-md-3  d-flex justify-content-center">
                 <div className="w-75 text-center cursor-pointer rounded-3 main-color-border product text-white align-content-center">
-                  <img className="w-50 mb-3" src='https://assets.adidas.com/images/w_600,f_auto,q_auto/9f081356674948ca99f3ac820134738c_9366/Essentials_Loose_Logo_Tank_Top_White_GL0567_21_model.jpg' alt="" />
+                  <Link to={'/headphone'}><img className="w-50 mb-3" src='https://assets.adidas.com/images/w_600,f_auto,q_auto/9f081356674948ca99f3ac820134738c_9366/Essentials_Loose_Logo_Tank_Top_White_GL0567_21_model.jpg' alt="" /></Link>
                   <h5>Clothes</h5>
                 </div>
               </div>

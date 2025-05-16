@@ -85,7 +85,7 @@ async  function deleteMyCart(){
        return   <div key={item._id} className="row border-bottom py-2">
             <div className="col-md-1">
             
-              <img className='w-100' src={item.product.images[0]} alt="" />
+             <Link to={'/product-details/'+item.product._id}> <img className='w-100' src={item.product.images[0]} alt="" /></Link>
             </div>
             <div className="col-md-11 d-flex justify-content-between align-items-center">
               <div>
@@ -117,7 +117,7 @@ async  function deleteMyCart(){
 >
   Place Order
 </Link>
-    <button className='btn bg-main text-white ms-5' onClick={()=>{
+    <button className='btn bg-danger text-white ms-5' onClick={()=>{
       deleteMyCart()
     }}>Reset cart</button>
 </div>

@@ -4,7 +4,7 @@ import { productContext } from '../context/ProductContext.js';
 import { storeContext } from '../context/storeContext';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
+import "../wishlist/wishlist.style.css"
 export default function WishList() {
 
   // get wish list context
@@ -69,7 +69,8 @@ export default function WishList() {
 
         <h2 className='mt-3'>Wish List :</h2>
         {wishListItem?.map((item, index) => {
-          return <div key={index} className="row border-bottom py-2">
+          return <div key={index} className=" d-flex justify-content-between border-bottom py-2">
+             <Link className='row un-underline' to={'/product-details/'+item._id}>
             <div className="col-md-1">
               {/* `http://localhost:3000/uploads/${}` */}
               <img className='w-100' src={item.images[0]} alt="" />
@@ -82,11 +83,16 @@ export default function WishList() {
                
               </div>
               <div>
-                <button onClick={() => {
-                  deleteWishItem(item._id)
-                }} className='btn m-0 p-0 mt-2 text-white d-flex justify-content-between'> <i className="fa-solid fa-trash-can main-color me-2"></i> Remove</button>
+               
               </div>
             </div>
+
+            </Link>
+             <button onClick={() => {
+                  deleteWishItem(item._id)
+                }} className='btn removeButton m-0 p-0 mt-2 text-white d-flex justify-content-between'> <i className="fa-solid fa-trash-can main-color me-2"></i> Remove
+                </button>
+            {/*  */}
           </div>
         })}
       </div>

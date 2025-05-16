@@ -176,7 +176,6 @@ export default function PlaceOrder() {
                     onChange={handlePaymentMethodChange}
                   >
                     <option value="CashOnDelivery">Cash on Delivery</option>
-                    <option value="CreditCard">Credit Card</option>
                     <option value="PayPal">PayPal</option>
                   </select>
                 </div>
