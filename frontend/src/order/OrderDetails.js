@@ -21,6 +21,14 @@ export default function OrderDetails() {
   const [orderStatus,setorderStatus]=useState('')
 
 
+  
+    const getImageUrl = (imagePath) => {
+  if (!imagePath) return '/placeholder-image.jpg';
+  // Check if it's already a full URL (for seeded data maybe)
+  if (imagePath.startsWith('http')) return imagePath;
+  // Otherwise construct the proper URL
+  return `${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/uploads/${imagePath}`;
+};
 
   const updateOrderFunction=async(updates)=>{
       try {
@@ -154,7 +162,7 @@ export default function OrderDetails() {
                 {order.orderItems.map((item) => (
                   <div key={item._id} className="row border-bottom align-items-center">
                     <div className="col-md-2">
-                      <img src={item.product.images[0]} alt={item.product.name} className="img-fluid" />
+                      <img src={getImageUrl(item.product.images[0])} alt={item.product.name} className="img-fluid" />
                     </div>
                     <div className="col-md-5">
                       <Link to={`/product-details/${item.product._id}`} className="text-white">

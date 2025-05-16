@@ -14,6 +14,13 @@ export default function WishList() {
   // const [keyId , setKeyId]=useState('')
   const [wishListItem, setWishListItems] = useState([])
 
+  const getImageUrl = (imagePath) => {
+  if (!imagePath) return '/placeholder-image.jpg';
+  // Check if it's already a full URL (for seeded data maybe)
+  if (imagePath.startsWith('http')) return imagePath;
+  // Otherwise construct the proper URL
+  return `${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/uploads/${imagePath}`;
+};
 
   // function to delete item from wish list
 
@@ -73,7 +80,7 @@ export default function WishList() {
              <Link className='row un-underline' to={'/product-details/'+item._id}>
             <div className="col-md-1">
               {/* `http://localhost:3000/uploads/${}` */}
-              <img className='w-100' src={item.images[0]} alt="" />
+              <img className='w-100' src={getImageUrl(item.images[0])} alt="" />
             </div>
             <div className="col-md-11 d-flex justify-content-between align-items-center">
               <div className='px-4'>

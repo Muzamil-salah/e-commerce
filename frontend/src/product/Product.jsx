@@ -38,31 +38,7 @@ export default function Product({ item }) {
   // Otherwise construct the proper URL
   return `${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/uploads/${imagePath}`;
 };
-  // const [isLoved, setIsLoved] = useState([]);
-  // const [inCart, setInCart] = useState([]);
 
-  // async function getPrevValues(){
-  //   let data=  await getFromWishList()
-
-  //   const loved = await data.wishlistItems.map(element => element._id);
-
-  //     setIsLoved(loved);
-
-  //     // //////////////////////
-  //     let cartItems= await getCart();
-  //     let items=await cartItems.cartItems.map(element => element.product._id);
-  //      setInCart(items)
-
-  //     setCounter(cartItems.length)
-
-  // }
-  // useEffect(() => {
-  //   getPrevValues()
-
-  // }, []);
-  // console.log(data)
-  // ---------------------------- now i am heeeeeeeeereeeeeeeeeeeeeeeee -------------------------------------------
-  // add to cart function
   async function addProductToCart(productId) {
     setBtnLoading(false);
     let data = await addToCart(productId);
@@ -155,15 +131,7 @@ export default function Product({ item }) {
             {/* end details */}
           </Link>
           {/* end link to product details */}
-          <p
-            className={`fs-6 fw-semibold m-0 ${
-              item.countInStock === 0 ? "text-danger" : "main-color"
-            }`}
-          >
-            {item.countInStock === 0
-              ? "Not available"
-              : `In Stock: ${item.countInStock}`}
-          </p>
+          
 
           <i
             className={`icon-link fa-solid fa-heart ms-2 mb-3 ${
@@ -173,6 +141,15 @@ export default function Product({ item }) {
               addProductToWishList(item._id);
             }}
           ></i>
+          <p
+            className={`fs-6 fw-semibold m-0 ${
+              item.countInStock === 0 ? "text-danger" : "main-color"
+            }`}
+          >
+            {item.countInStock === 0
+              ? "Not available"
+              : `In Stock: ${item.countInStock}`}
+          </p>
           <button
             disabled={!btnLoading || item.countInStock === 0}
             onClick={() => addProductToCart(item._id)}

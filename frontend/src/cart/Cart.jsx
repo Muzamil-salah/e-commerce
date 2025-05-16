@@ -21,6 +21,15 @@ export default function Cart() {
   const [data, setData] = useState([]);
   const [showConfirm, setShowConfirm] = useState(false);
 
+
+   const getImageUrl = (imagePath) => {
+  if (!imagePath) return '/placeholder-image.jpg';
+  // Check if it's already a full URL (for seeded data maybe)
+  if (imagePath.startsWith('http')) return imagePath;
+  // Otherwise construct the proper URL
+  return `${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/uploads/${imagePath}`;
+};
+
   // function to delete item from cart
 
   async function deleteCartItem(id) {
@@ -101,7 +110,7 @@ export default function Cart() {
               <div className="col-md-1">
                 <Link to={"/product-details/" + item.product._id}>
                   {" "}
-                  <img className="w-100" src={item.product.images[0]} alt="" />
+                  <img className="w-100" src={getImageUrl(item.product.images?.[0])} alt="" />
                 </Link>
               </div>
               <div className="col-md-11 d-flex justify-content-between align-items-center">
