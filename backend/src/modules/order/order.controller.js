@@ -8,8 +8,7 @@ import getByOrderId from "./services/getOrderById.service.js";
 import { 
   processPayment, 
   createPayPalPayment, 
-  verifyPayPalPayment,
-  createStripePaymentIntent
+  verifyPayPalPayment
 } from "./services/payment.service.js";
 import { endpoint } from "../user/user.endpoint.js";
 import updateOrder from "./services/updateOrder.service.js";
@@ -25,7 +24,6 @@ router.get('/:id' , authentication(),getByOrderId)
 router.post('/payment/process', authentication(), processPayment);
 router.post('/payment/paypal/create/:id', authentication(), createPayPalPayment);
 router.get('/payment/paypal/verify/:orderId', authentication(), verifyPayPalPayment);
-router.post('/payment/stripe/create-intent', authentication(), createStripePaymentIntent);
 router.put('/update/:orderId' , authentication(),updateOrder)
 router.delete('/delete/:orderId' , authentication(),deleteOrder)
 

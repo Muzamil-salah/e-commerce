@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken'
     try {
         const {name , email , password ,confirmationPassword , phone} = req.body;
         if(password !== confirmationPassword){
-            return res.status(400).json({mssage:"password mismatch confirmation Password!!"})
+            return res.status(400).json({mssage:"pssword mismatch caonfirmation Password!!"})
         }
 
         const checkUser= await User.findOne({email});

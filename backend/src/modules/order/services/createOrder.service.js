@@ -40,10 +40,6 @@ import Cart from '../../../DB/models/Cart.model.js';
 
    return res.status(201).json({status:'success',createdOrder:order});
   } catch (error) {
-    console.log('im here');
-    console.log(error.message );
-    
-    
    return res.status(500).json({status:'fail', error: error.message });
   }
 };

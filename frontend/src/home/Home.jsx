@@ -24,15 +24,22 @@ export default function Home() {
   
   async function getPrevValues() {
     let data = await getFromWishList();
-    const loved = data.wishlistItems.map((element) => element._id);
+    console.log(data);
+    if(data?.status==='success'){
+ const loved = data.wishlistItems.map((element) => element._id);
     setIsLoved(loved);
-    // //////////////////////
+    }
+   
     let cartItems = await getCart();
-    setCartItems(cartItems.cartItems)
+    console.log(cartItems);
+    if(cartItems?.status==='success'){
+  setCartItems(cartItems.cartItems)
     
-    let items = cartItems.cartItems.map((element) => element.product._id);
+    let items = cartItems?.cartItems.map((element) => element.product._id);
     setInCart(items);
     setCounter(cartItems.length);
+    }
+  
 
 
   }

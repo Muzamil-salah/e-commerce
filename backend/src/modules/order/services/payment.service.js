@@ -252,37 +252,3 @@ export const verifyPayPalPayment = async (req, res) => {
   }
 };
 
-// Create Stripe payment intent
-export const createStripePaymentIntent = async (req, res) => {
-  try {
-    const { orderId } = req.body;
-    const order = await Order.findById(orderId);
-
-    if (!order) {
-      return res.status(404).json({ status: 'fail', message: 'Order not found' });
-    }
-
-    if (order.user.toString() !== req.user._id.toString()) {
-      return res.status(401).json({ status: 'fail', message: 'Not authorized' });
-    }
-
-    if (order.isPaid) {
-      return res.status(400).json({ status: 'fail', message: 'Order is already paid' });
-    }
-
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(order.totalPrice * 100), // Convert to cents
-      currency: 'usd',
-      metadata: { orderId: order._id.toString() }
-    });
-
-    return res.status(200).json({ 
-      status: 'success', 
-      clientSecret: paymentIntent.client_secret 
-    });
-
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ status: 'fail', message: 'Stripe payment intent creation failed', error: error.message });
-  }
-};

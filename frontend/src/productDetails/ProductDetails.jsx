@@ -36,13 +36,17 @@ export default function ProductDetails() {
 
          async function getPrevValues(){
         let data=  await getFromWishList()
+        if(data?.status==='success'){
         const loved = data.wishlistItems.map(element => element._id);
           setIsLoved(loved);
-          // //////////////////////
+        }
       let cartItems= await getCart();
-       let items=cartItems.cartItems.map(element => element.product._id);
+      if(cartItems?.status==='success'){
+     let items=cartItems.cartItems.map(element => element.product._id);
       setInCart(items)
       setCounter(cartItems.length)
+      }
+  
       }
       useEffect(() => {
         // هنا بتحطي الفانكشن اللي تشتغل مرة واحدة بس

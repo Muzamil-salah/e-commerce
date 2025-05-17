@@ -14,10 +14,6 @@ import Order from "../../../DB/models/order.model.js";
      return res.status(401).json({status:'fail' , message:'not authorized'})
     }
     })
-    
-    // Check authorization
-    
-
    return res.status(200).json({status:'success',orders:order });
   } catch (error) {
     res.status(500).json({ status:'fail',error: error.message });
