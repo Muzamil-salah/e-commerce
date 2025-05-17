@@ -7,7 +7,7 @@ import Cart from '../../../DB/models/Cart.model.js';
     const user=req.user;
     const cart= await Cart.findOne({user:user}).select('items _id').populate({
     path: 'items.product',
-    select: 'price' // Only get the price field from Product
+    select: 'price' 
   });
 
     let orderItems=cart.items

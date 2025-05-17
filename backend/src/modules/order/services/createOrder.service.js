@@ -3,9 +3,10 @@ import Order from '../../../DB/models/order.model.js';
 import Cart from '../../../DB/models/Cart.model.js';
 
  const createOrder = async (req, res) => {
-  try {
-
-    const user=req.user;
+   try {
+     
+     const user=req.user;
+     const {  shippingAddress, paymentMethod } = req.body;
     const cart= await Cart.findOne({user:user}).select('items _id').populate({
     path: 'items.product',
     select: 'price'
@@ -17,7 +18,6 @@ import Cart from '../../../DB/models/Cart.model.js';
       return sum + (item.product.price * item.quantity);
     }, 0);
 
-    const {  shippingAddress, paymentMethod } = req.body;
 
     if (orderItems && orderItems.length === 0) {
      return res.status(400).json({status:'fail' , message:'no items found in cart'})

@@ -2,9 +2,6 @@ import Order from "../../../DB/models/order.model.js";
 import Product from "../../../DB/models/Product.model.js";
 const updateOrder=async(req , res , next)=>{
     try {
-        console.log(
-            'i m in update order service'
-        );
         
         const updates = req.body;
         const { isPaid ,isDelivered } = req.body;
@@ -21,7 +18,6 @@ const updateOrder=async(req , res , next)=>{
             orderToUpdate.orderItems.forEach(async (item) => {
             let product= await Product.findById(item.product)
           let updatedProduct=  await Product.findByIdAndUpdate(product._id , {countInStock:product.countInStock-item.quantity} , {new:true})
-            console.log(updatedProduct);
         })
         }
         else if(isDelivered){
